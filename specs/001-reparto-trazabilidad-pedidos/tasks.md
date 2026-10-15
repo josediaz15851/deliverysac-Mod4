@@ -54,7 +54,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T009 [P] Crear entidades de dominio y enums `EstadoPedido`, `RolUsuario`, `TipoUnidad` en `backend/src/DeliverySac.Api/Domain/`.
 - [x] T010 Crear `DeliverySacDbContext` (EF Core) con DbSets y configuraciones (únicos y filtrados del `data-model.md`) en `backend/src/DeliverySac.Api/Infrastructure/`.
 - [x] T011 Crear migración inicial y aplicarla a SQL Server Express (conexión por `DELIVERYSAC_CONNECTION`) en `backend/src/DeliverySac.Api/Infrastructure/Migrations/`.
-- [ ] T012 Sembrar datos base en Development (usuarios por rol, 3 motos lineales + 2 furgonetas, un cliente) leyendo `DELIVERYSAC_ADMIN_PASSWORD` en `backend/src/DeliverySac.Api/Infrastructure/Seed/`.
+- [x] T012 Sembrar datos base en Development (usuarios por rol, 3 motos lineales + 2 furgonetas, un cliente) leyendo `DELIVERYSAC_ADMIN_PASSWORD` en `backend/src/DeliverySac.Api/Infrastructure/Seed/`.
 - [ ] T013 Configurar `appsettings` y lectura de secreto por entorno sin credenciales versionadas en `backend/src/DeliverySac.Api/Program.cs`.
 - [ ] T014 Configurar middleware de errores uniforme (ProblemDetails 400/401/403/404/405) y CORS en `backend/src/DeliverySac.Api/Program.cs`.
 - [ ] T015 Implementar hashing bcrypt (coste >= 10) y autenticación/autorización JWT por rol en `backend/src/DeliverySac.Api/Security/`.
