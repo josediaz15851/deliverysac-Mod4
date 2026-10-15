@@ -33,7 +33,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 **Purpose**: Inicialización de proyectos y estructura base.
 
 - [x] T001 Crear solución backend `backend/DeliverySac.sln` con `src/DeliverySac.Api` (Web API .NET 8) y `tests/DeliverySac.Tests` (xUnit).
-- [ ] T002 Crear carpetas backend `Controllers/`, `Domain/`, `Application/`, `Infrastructure/`, `Security/`, `Contracts/` en `backend/src/DeliverySac.Api/`.
+- [x] T002 Crear carpetas backend `Controllers/`, `Domain/`, `Application/`, `Infrastructure/`, `Security/`, `Contracts/` en `backend/src/DeliverySac.Api/`.
 - [ ] T003 [P] Inicializar frontend Angular (última estable) en `frontend/` y borrar el boilerplate inicial de demo.
 - [ ] T004 [P] Instalar y configurar PrimeNG + PrimeFlex + PrimeIcons y base de layout Sakai (`app-layout`, `app-topbar`, `app-sidebar`, `app-footer`) en `frontend/`.
 - [ ] T005 [P] Configurar `@angular/pwa` (manifest + service worker) en `frontend/`.
