@@ -18,6 +18,8 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
 {
     public const string AdminUser = "admin.test";
     public const string AdminPassword = "Clave.123";
+    public const string RepartidorUser = "repartidor.test";
+    public const string OtroRepartidorUser = "repartidor2.test";
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -61,8 +63,16 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
         {
             db.Usuarios.Add(new Usuario
             {
-                NombreUsuario = "repartidor.test",
+                NombreUsuario = RepartidorUser,
                 NombreCompleto = "Repartidor de Prueba",
+                PasswordHash = hasher.Hash(AdminPassword),
+                Rol = RolUsuario.Repartidor,
+                Activo = true,
+            });
+            db.Usuarios.Add(new Usuario
+            {
+                NombreUsuario = OtroRepartidorUser,
+                NombreCompleto = "Otro Repartidor de Prueba",
                 PasswordHash = hasher.Hash(AdminPassword),
                 Rol = RolUsuario.Repartidor,
                 Activo = true,
@@ -87,12 +97,17 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
 
     public async Task<HttpClient> CreateAuthenticatedClientAsync()
     {
+        return await CreateAuthenticatedClientAsync(AdminUser, AdminPassword);
+    }
+
+    public async Task<HttpClient> CreateAuthenticatedClientAsync(string usuario, string password)
+    {
         var client = CreateClient();
 
         var loginResponse = await client.PostAsJsonAsync("/api/auth/login", new
         {
-            nombreUsuario = AdminUser,
-            password = AdminPassword,
+            nombreUsuario = usuario,
+            password,
         });
 
         loginResponse.EnsureSuccessStatusCode();

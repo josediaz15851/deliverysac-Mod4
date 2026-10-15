@@ -128,7 +128,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T048 [US3] **Front**: ruta del día del repartidor (una columna, mobile-first, sin menú lateral, acciones táctiles grandes) en `frontend/src/app/features/repartidor/ruta-dia/`.
 - [x] T049 [US3] **Front**: componente compartido `estado-tag` (etiqueta de color por estado) en `frontend/src/app/shared/estado-tag/`.
 - [x] T050 [P] [US3] **Test back**: unit de la máquina de estados (`PENDIENTE → ASIGNADO → EN_RUTA → (ENTREGADO|NO_ENTREGADO|REPROGRAMADO)`, `ENTREGADO` terminal, motivo obligatorio) en `backend/tests/DeliverySac.Tests/Unit/EstadoPedidoTests.cs` (debe FALLAR primero).
-- [ ] T051 [P] [US3] **Test back**: integración AC-05/06/07/07a/09/10/11/14/15 en `backend/tests/DeliverySac.Tests/Integration/EstadosEndpointsTests.cs` (debe FALLAR primero).
+- [x] T051 [P] [US3] **Test back**: integración AC-05/06/07/07a/09/10/11/14/15 en `backend/tests/DeliverySac.Tests/Integration/EstadosEndpointsTests.cs` (debe FALLAR primero).
 - [ ] T052 [US3] **Back**: implementar la máquina de estados y el registro inmutable de traza (`FechaHora` y `UsuarioId` asignados por el servidor) en `backend/src/DeliverySac.Api/Application/EstadoPedidoService.cs`.
 - [ ] T053 [US3] **Back**: endpoints `POST /api/pedidos/{id}/estados` (400 transición inválida / 400 sin motivo / 403 no propietario) y `GET /api/pedidos/{id}/trazabilidad` (solo lectura; 405 ante intentos de edición) en `backend/src/DeliverySac.Api/Controllers/PedidosController.cs`.
 - [ ] T054 [US3] **Back**: endpoint `GET /api/repartidor/pedidos` (solo pedidos propios del día; 403 en accesos ajenos) en `backend/src/DeliverySac.Api/Controllers/RepartidorController.cs`.
