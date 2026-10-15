@@ -51,7 +51,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 
 **⚠️ CRITICAL**: Ninguna historia comienza hasta completar esta fase.
 
-- [ ] T009 [P] Crear entidades de dominio y enums `EstadoPedido`, `RolUsuario`, `TipoUnidad` en `backend/src/DeliverySac.Api/Domain/`.
+- [x] T009 [P] Crear entidades de dominio y enums `EstadoPedido`, `RolUsuario`, `TipoUnidad` en `backend/src/DeliverySac.Api/Domain/`.
 - [ ] T010 Crear `DeliverySacDbContext` (EF Core) con DbSets y configuraciones (únicos y filtrados del `data-model.md`) en `backend/src/DeliverySac.Api/Infrastructure/`.
 - [ ] T011 Crear migración inicial y aplicarla a SQL Server Express (conexión por `DELIVERYSAC_CONNECTION`) en `backend/src/DeliverySac.Api/Infrastructure/Migrations/`.
 - [ ] T012 Sembrar datos base en Development (usuarios por rol, 3 motos lineales + 2 furgonetas, un cliente) leyendo `DELIVERYSAC_ADMIN_PASSWORD` en `backend/src/DeliverySac.Api/Infrastructure/Seed/`.
