@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using DeliverySac.Api.Application;
 
 namespace DeliverySac.Tests.Integration;
 
@@ -18,8 +19,8 @@ public class ListadoDiaTests : IClassFixture<DeliverySacApiFactory>
     public async Task Dia_IncluyePedidosDeHoyYReprogramadosDeDiasPrevios()
     {
         var admin = await _factory.CreateAuthenticatedClientAsync();
-        var hoyId = await CrearPedidoAsync(admin, DateOnly.FromDateTime(DateTime.UtcNow));
-        var ayerId = await CrearPedidoReprogramadoAsync(admin, DateOnly.FromDateTime(DateTime.UtcNow).AddDays(-1));
+        var hoyId = await CrearPedidoAsync(admin, FechaOperativa.Hoy());
+        var ayerId = await CrearPedidoReprogramadoAsync(admin, FechaOperativa.Hoy().AddDays(-1));
 
         var dia = await admin.GetFromJsonAsync<JsonElement>("/api/pedidos/dia?page=1&size=50");
         var items = dia.GetProperty("items").EnumerateArray().ToList();

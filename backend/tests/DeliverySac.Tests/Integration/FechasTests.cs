@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using DeliverySac.Api.Application;
 
 namespace DeliverySac.Tests.Integration;
 
@@ -19,7 +20,7 @@ public class FechasTests : IClassFixture<DeliverySacApiFactory>
         var admin = await _factory.CreateAuthenticatedClientAsync();
         var clienteId = await CrearClienteAsync(admin);
 
-        var hoy = DateOnly.FromDateTime(DateTime.UtcNow);
+        var hoy = FechaOperativa.Hoy();
         var fecha = hoy.ToString("yyyy-MM-dd");
 
         var creacion = await admin.PostAsJsonAsync("/api/pedidos", new

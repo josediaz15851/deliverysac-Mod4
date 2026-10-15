@@ -166,7 +166,7 @@ public class PedidosController : ControllerBase
             {
                 Offset = offset,
                 PageSize = pageSize,
-                Hoy = DateOnly.FromDateTime(DateTime.UtcNow).ToDateTime(TimeOnly.MinValue),
+                Hoy = FechaOperativa.Hoy().ToDateTime(TimeOnly.MinValue),
                 Reprogramado = (int)EstadoPedido.Reprogramado,
             })).ToList();
 

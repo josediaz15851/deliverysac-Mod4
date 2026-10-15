@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using DeliverySac.Api.Application;
 using DeliverySac.Api.Contracts.Repartidor;
 using DeliverySac.Api.Infrastructure;
 using Microsoft.AspNetCore.Authorization;
@@ -23,7 +24,7 @@ public class RepartidorController : ControllerBase
     public async Task<ActionResult<IEnumerable<PedidoRutaDto>>> Pedidos(CancellationToken cancellationToken)
     {
         var usuarioId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
-        var hoy = DateOnly.FromDateTime(DateTime.UtcNow);
+        var hoy = FechaOperativa.Hoy();
 
         var pedidos = await _db.Pedidos
             .AsNoTracking()

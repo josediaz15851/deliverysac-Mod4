@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
+using DeliverySac.Api.Application;
 
 namespace DeliverySac.Tests.Integration;
 
@@ -124,7 +125,7 @@ public class EstadosEndpointsTests : IClassFixture<DeliverySacApiFactory>
         clienteResponse.EnsureSuccessStatusCode();
         var clienteId = (await clienteResponse.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("id").GetInt32();
 
-        var hoy = DateOnly.FromDateTime(DateTime.UtcNow).ToString("yyyy-MM-dd");
+        var hoy = FechaOperativa.Hoy().ToString("yyyy-MM-dd");
         var pedidoResponse = await admin.PostAsJsonAsync("/api/pedidos", new
         {
             clienteId,
