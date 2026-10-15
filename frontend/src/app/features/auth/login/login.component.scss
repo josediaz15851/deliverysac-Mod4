@@ -1,0 +1,135 @@
+.login {
+  display: flex;
+  min-height: 100vh;
+}
+
+.login__brand {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--primary-color) 0%, #0d47a1 100%);
+}
+
+.login__brand-content {
+  max-width: 22rem;
+  text-align: center;
+}
+
+.login__logo {
+  font-size: 3.5rem;
+}
+
+.login__brand-title {
+  margin: 1rem 0 0.5rem;
+  font-size: 2.25rem;
+}
+
+.login__brand-subtitle {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.login__panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(25, 118, 210, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(13, 71, 161, 0.18), transparent 45%),
+    var(--surface-ground);
+}
+
+.login__card {
+  width: 100%;
+  max-width: 24rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.login__title {
+  margin: 0 0 1.25rem;
+  font-size: 1.5rem;
+  color: var(--text-color);
+}
+
+.login__role-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.login__role-tab {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.6rem 0.25rem;
+  font-size: 0.8rem;
+  color: var(--text-color-secondary);
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+.login__role-tab--active {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+  background: rgba(25, 118, 210, 0.08);
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login__form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.login__form label {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.login__password,
+.login__form input {
+  width: 100%;
+}
+
+.login__field-error,
+.login__error {
+  color: var(--red-500, #d32f2f);
+  font-size: 0.8rem;
+}
+
+.login__error {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+}
+
+.login__submit {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .login__brand {
+    display: none;
+  }
+}

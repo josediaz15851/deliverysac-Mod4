@@ -1,0 +1,79 @@
+<div class="login">
+  <section class="login__brand">
+    <div class="login__brand-content">
+      <i class="pi pi-truck login__logo" aria-hidden="true"></i>
+      <h1 class="login__brand-title">DeliverySac</h1>
+      <p class="login__brand-subtitle">Reparto y trazabilidad de pedidos en tiempo real</p>
+    </div>
+  </section>
+
+  <section class="login__panel">
+    <div class="login__card">
+      <h2 class="login__title">Iniciar sesión</h2>
+
+      <div class="login__role-tabs" role="tablist" aria-label="Seleccionar rol">
+        @for (role of roles; track role.value) {
+          <button
+            type="button"
+            class="login__role-tab"
+            role="tab"
+            [class.login__role-tab--active]="activeRole.value === role.value"
+            [attr.aria-selected]="activeRole.value === role.value"
+            (click)="selectRole(role)"
+          >
+            <i [class]="role.icon" aria-hidden="true"></i>
+            <span>{{ role.label }}</span>
+          </button>
+        }
+      </div>
+
+      <form class="login__form" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="field">
+          <label for="nombreUsuario">Usuario</label>
+          <input
+            id="nombreUsuario"
+            type="text"
+            pInputText
+            formControlName="nombreUsuario"
+            autocomplete="username"
+            [attr.aria-invalid]="form.controls.nombreUsuario.invalid && form.controls.nombreUsuario.touched"
+          />
+          @if (form.controls.nombreUsuario.invalid && form.controls.nombreUsuario.touched) {
+            <small class="login__field-error">El usuario es obligatorio</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="password">Contraseña</label>
+          <p-password
+            inputId="password"
+            formControlName="password"
+            [feedback]="false"
+            [toggleMask]="true"
+            autocomplete="current-password"
+            styleClass="login__password"
+          ></p-password>
+          @if (form.controls.password.invalid && form.controls.password.touched) {
+            <small class="login__field-error">La contraseña es obligatoria</small>
+          }
+        </div>
+
+        @if (errorMessage) {
+          <p class="login__error" role="alert">
+            <i class="pi pi-exclamation-circle" aria-hidden="true"></i>
+            {{ errorMessage }}
+          </p>
+        }
+
+        <p-button
+          type="submit"
+          label="Ingresar"
+          icon="pi pi-sign-in"
+          styleClass="login__submit"
+          [loading]="loading"
+          [disabled]="loading"
+        ></p-button>
+      </form>
+    </div>
+  </section>
+</div>
