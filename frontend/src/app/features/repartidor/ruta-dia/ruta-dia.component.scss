@@ -1,0 +1,55 @@
+.ruta-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.ruta-dia__title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.ruta-dia__lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ruta-dia__card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: 0.75rem;
+}
+
+.ruta-dia__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.ruta-dia__cliente {
+  font-weight: 600;
+}
+
+.ruta-dia__direccion {
+  margin: 0;
+  color: var(--text-color-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.ruta-dia__total {
+  margin: 0;
+  font-weight: 600;
+}

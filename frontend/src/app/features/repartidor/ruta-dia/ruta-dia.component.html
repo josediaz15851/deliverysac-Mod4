@@ -1,0 +1,25 @@
+<div class="ruta-dia">
+  <h2 class="ruta-dia__title">Mi ruta de hoy</h2>
+
+  <app-data-state
+    [loading]="loading"
+    [empty]="!loading && pedidos.length === 0"
+    emptyMessage="No tienes pedidos asignados para hoy"
+  >
+    <ul class="ruta-dia__lista">
+      @for (pedido of pedidos; track pedido.id) {
+        <li class="ruta-dia__card">
+          <div class="ruta-dia__card-header">
+            <span class="ruta-dia__cliente">{{ pedido.clienteNombre }}</span>
+            <app-estado-tag [estado]="pedido.estado"></app-estado-tag>
+          </div>
+          <p class="ruta-dia__direccion">
+            <i class="pi pi-map-marker" aria-hidden="true"></i>
+            {{ pedido.direccion }}
+          </p>
+          <p class="ruta-dia__total">Total: {{ pedido.total | currency: 'USD' : 'symbol' : '1.2-2' : 'en-US' }}</p>
+        </li>
+      }
+    </ul>
+  </app-data-state>
+</div>

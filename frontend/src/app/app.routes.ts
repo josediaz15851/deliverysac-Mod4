@@ -68,7 +68,10 @@ export const routes: Routes = [
       {
         path: 'ruta',
         canActivate: [roleGuard('Repartidor')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/repartidor/ruta-dia/ruta-dia.component').then(
+            (m) => m.RutaDiaComponent,
+          ),
         data: { title: 'Mi ruta', layout: 'repartidor' },
       },
     ],
