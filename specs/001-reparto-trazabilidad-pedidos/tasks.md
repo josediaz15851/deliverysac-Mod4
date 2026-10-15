@@ -38,7 +38,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T004 [P] Instalar y configurar PrimeNG + PrimeFlex + PrimeIcons y base de layout Sakai (`app-layout`, `app-topbar`, `app-sidebar`, `app-footer`) en `frontend/`.
 - [x] T005 [P] Configurar `@angular/pwa` (manifest + service worker) en `frontend/`.
 - [x] T006 Personalizar el tema PrimeNG (tokens `--primary-color`/`--surface-card`/`--text-color`, primario `#1976D2`) en `frontend/src/theme/`.
-- [ ] T007 [P] Configurar xUnit + `Microsoft.AspNetCore.Mvc.Testing` y dejar una prueba trivial en verde en `backend/tests/DeliverySac.Tests/`.
+- [x] T007 [P] Configurar xUnit + `Microsoft.AspNetCore.Mvc.Testing` y dejar una prueba trivial en verde en `backend/tests/DeliverySac.Tests/`.
 - [ ] T008 [P] Configurar `.gitignore` (raíz) y formato/lint en `backend/DeliverySac.sln` y `frontend/angular.json`; habilitar el runner de tests del front (`ng test`).
 
 **Checkpoint**: Proyectos compilan (`dotnet build`, `npm run build`) y runners de test operativos.
