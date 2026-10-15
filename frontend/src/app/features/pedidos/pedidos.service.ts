@@ -35,6 +35,17 @@ export interface PedidoDetalle extends Pedido {
   lineas: PedidoLineaDetalle[];
 }
 
+export interface PedidoDia {
+  id: number;
+  clienteNombre: string;
+  direccion: string;
+  fechaReparto: string;
+  estado: string;
+  motivo?: string;
+  fechaHoraCambio?: string;
+  repartidorNombre?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PedidosService {
   private readonly http = inject(HttpClient);
@@ -52,5 +63,10 @@ export class PedidosService {
 
   obtener(id: number): Observable<PedidoDetalle> {
     return this.http.get<PedidoDetalle>(`${this.baseUrl}/${id}`);
+  }
+
+  listarDia(page: number, size: number): Observable<PagedResult<PedidoDia>> {
+    const params = new HttpParams().set('page', page).set('size', size);
+    return this.http.get<PagedResult<PedidoDia>>(`${this.baseUrl}/dia`, { params });
   }
 }
