@@ -36,6 +36,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
+builder.Services.AddScoped<DeliverySac.Api.Application.EstadoPedidoService>();
 
 var jwtKey = Environment.GetEnvironmentVariable("DELIVERYSAC_JWT_KEY")
     ?? builder.Configuration["Jwt:Key"];

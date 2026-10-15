@@ -8,22 +8,26 @@ using Dapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace DeliverySac.Api.Controllers;
 
 [ApiController]
 [Route("api/pedidos")]
-[Authorize(Roles = "Administrador")]
+[Authorize]
 public class PedidosController : ControllerBase
 {
     private readonly DeliverySacDbContext _db;
+    private readonly EstadoPedidoService _estadoPedidoService;
 
-    public PedidosController(DeliverySacDbContext db)
+    public PedidosController(DeliverySacDbContext db, EstadoPedidoService estadoPedidoService)
     {
         _db = db;
+        _estadoPedidoService = estadoPedidoService;
     }
 
     [HttpPost]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<PedidoDetalleDto>> Crear(
         [FromBody] CrearPedidoRequest request,
         CancellationToken cancellationToken)
@@ -80,6 +84,7 @@ public class PedidosController : ControllerBase
     }
 
     [HttpGet]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<PagedResult<PedidoDto>>> Listar(
         [FromQuery] int page = 1,
         [FromQuery] int size = 10,
@@ -120,6 +125,7 @@ public class PedidosController : ControllerBase
     }
 
     [HttpGet("{id:int}")]
+    [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<PedidoDetalleDto>> ObtenerPorId(int id, CancellationToken cancellationToken)
     {
         var pedido = await _db.Pedidos
@@ -134,6 +140,78 @@ public class PedidosController : ControllerBase
         }
 
         return Ok(ToDetalleDto(pedido, pedido.Cliente.Nombre));
+    }
+
+    [HttpPost("{id:int}/estados")]
+    [Authorize(Roles = "Repartidor")]
+    public async Task<IActionResult> CambiarEstado(
+        int id,
+        [FromBody] CambioEstadoRequest request,
+        CancellationToken cancellationToken)
+    {
+        if (!Enum.TryParse<EstadoPedido>(request.EstadoNuevo, ignoreCase: true, out var estadoNuevo))
+        {
+            return BadRequest(new ProblemDetails
+            {
+                Title = "Estado inválido",
+                Detail = $"El estado '{request.EstadoNuevo}' no es válido.",
+                Status = StatusCodes.Status400BadRequest,
+            });
+        }
+
+        var usuarioId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "0");
+        var operacionId = request.OperacionId ?? Guid.NewGuid();
+
+        var resultado = await _estadoPedidoService.CambiarEstadoAsync(
+            id,
+            estadoNuevo,
+            request.Motivo,
+            usuarioId,
+            operacionId,
+            cancellationToken);
+
+        return resultado switch
+        {
+            ResultadoCambioEstado.Ok => Ok(),
+            ResultadoCambioEstado.PedidoNoEncontrado => NotFound(),
+            ResultadoCambioEstado.NoPropietario => Forbid(),
+            ResultadoCambioEstado.TransicionInvalida => BadRequest(new ProblemDetails
+            {
+                Title = "Transición inválida",
+                Detail = "El cambio de estado solicitado no está permitido.",
+                Status = StatusCodes.Status400BadRequest,
+            }),
+            ResultadoCambioEstado.MotivoRequerido => BadRequest(new ProblemDetails
+            {
+                Title = "Motivo requerido",
+                Detail = "Debe indicar un motivo para este estado.",
+                Status = StatusCodes.Status400BadRequest,
+            }),
+            _ => StatusCode(StatusCodes.Status500InternalServerError),
+        };
+    }
+
+    [HttpGet("{id:int}/trazabilidad")]
+    [Authorize(Roles = "Administrador,Repartidor,Supervisor")]
+    public async Task<ActionResult<TrazabilidadDto>> Trazabilidad(int id, CancellationToken cancellationToken)
+    {
+        var items = await _db.CambiosEstado
+            .AsNoTracking()
+            .Where(c => c.PedidoId == id)
+            .OrderBy(c => c.FechaHora)
+            .ThenBy(c => c.Id)
+            .Select(c => new TrazabilidadItemDto
+            {
+                Id = c.Id,
+                EstadoAnterior = c.EstadoAnterior == null ? null : c.EstadoAnterior.ToString(),
+                EstadoNuevo = c.EstadoNuevo.ToString(),
+                FechaHora = c.FechaHora,
+                Usuario = c.Usuario.NombreUsuario,
+                Motivo = c.Motivo,
+            })
+            .ToListAsync(cancellationToken);
+
+        return Ok(new TrazabilidadDto { Items = items });
     }
 
     private sealed class PedidoRow
