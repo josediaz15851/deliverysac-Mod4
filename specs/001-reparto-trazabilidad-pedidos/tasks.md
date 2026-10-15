@@ -36,7 +36,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T002 Crear carpetas backend `Controllers/`, `Domain/`, `Application/`, `Infrastructure/`, `Security/`, `Contracts/` en `backend/src/DeliverySac.Api/`.
 - [x] T003 [P] Inicializar frontend Angular (última estable) en `frontend/` y borrar el boilerplate inicial de demo.
 - [x] T004 [P] Instalar y configurar PrimeNG + PrimeFlex + PrimeIcons y base de layout Sakai (`app-layout`, `app-topbar`, `app-sidebar`, `app-footer`) en `frontend/`.
-- [ ] T005 [P] Configurar `@angular/pwa` (manifest + service worker) en `frontend/`.
+- [x] T005 [P] Configurar `@angular/pwa` (manifest + service worker) en `frontend/`.
 - [ ] T006 Personalizar el tema PrimeNG (tokens `--primary-color`/`--surface-card`/`--text-color`, primario `#1976D2`) en `frontend/src/theme/`.
 - [ ] T007 [P] Configurar xUnit + `Microsoft.AspNetCore.Mvc.Testing` y dejar una prueba trivial en verde en `backend/tests/DeliverySac.Tests/`.
 - [ ] T008 [P] Configurar `.gitignore` (raíz) y formato/lint en `backend/DeliverySac.sln` y `frontend/angular.json`; habilitar el runner de tests del front (`ng test`).
