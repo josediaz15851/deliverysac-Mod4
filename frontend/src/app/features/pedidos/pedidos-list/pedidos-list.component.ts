@@ -3,14 +3,14 @@ import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { TableLazyLoadEvent, TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { TagModule } from 'primeng/tag';
 import { CurrencyPipe } from '@angular/common';
 import { Pedido, PedidosService } from '../pedidos.service';
 import { DataStateComponent } from '../../../shared/data-state/data-state.component';
+import { EstadoTagComponent } from '../../../shared/estado-tag/estado-tag.component';
 
 @Component({
   selector: 'app-pedidos-list',
-  imports: [TableModule, ButtonModule, TagModule, DatePipe, CurrencyPipe, DataStateComponent],
+  imports: [TableModule, ButtonModule, DatePipe, CurrencyPipe, DataStateComponent, EstadoTagComponent],
   templateUrl: './pedidos-list.component.html',
   styleUrl: './pedidos-list.component.scss',
 })
@@ -37,33 +37,6 @@ export class PedidosListComponent implements OnInit {
 
   nuevo(): void {
     void this.router.navigate(['/pedidos/nuevo']);
-  }
-
-  severity(estado: string): 'success' | 'info' | 'warn' | 'danger' | 'secondary' {
-    switch (estado) {
-      case 'Entregado':
-        return 'success';
-      case 'Asignado':
-      case 'EnRuta':
-        return 'info';
-      case 'NoEntregado':
-        return 'danger';
-      case 'Reprogramado':
-        return 'secondary';
-      default:
-        return 'warn';
-    }
-  }
-
-  etiqueta(estado: string): string {
-    switch (estado) {
-      case 'EnRuta':
-        return 'En ruta';
-      case 'NoEntregado':
-        return 'No entregado';
-      default:
-        return estado;
-    }
   }
 
   private cargar(): void {

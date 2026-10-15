@@ -28,7 +28,7 @@
           <td>{{ pedido.clienteNombre }}</td>
           <td>{{ pedido.fechaReparto | date: 'dd/MM/yyyy' }}</td>
           <td>
-            <p-tag [value]="etiqueta(pedido.estado)" [severity]="severity(pedido.estado)"></p-tag>
+            <app-estado-tag [estado]="pedido.estado"></app-estado-tag>
           </td>
           <td>{{ pedido.total | currency: 'USD' : 'symbol' : '1.2-2' : 'en-US' }}</td>
         </tr>
