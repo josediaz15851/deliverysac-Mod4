@@ -1,11 +1,13 @@
 using DeliverySac.Api.Domain;
 using DeliverySac.Api.Domain.Enums;
 using DeliverySac.Api.Infrastructure;
+using DeliverySac.Api.Infrastructure.Seed;
 using DeliverySac.Api.Security;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -41,9 +43,11 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
 
         await db.Database.MigrateAsync();
 
+        var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
+        await DbSeeder.SeedAsync(db, hasher, AdminPassword, NullLogger.Instance);
+
         if (!await db.Usuarios.AnyAsync(u => u.NombreUsuario == AdminUser))
         {
-            var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
             db.Usuarios.Add(new Usuario
             {
                 NombreUsuario = AdminUser,
