@@ -1,0 +1,56 @@
+<div class="clientes-list">
+  <div class="clientes-list__header">
+    <h2>Clientes</h2>
+    <p-button label="Nuevo cliente" icon="pi pi-plus" (onClick)="abrirNuevo()"></p-button>
+  </div>
+
+  <app-data-state [loading]="loading" [empty]="!loading && clientes.length === 0">
+    <p-table
+      [value]="clientes"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="size"
+      [totalRecords]="total"
+      [tableStyle]="{ 'min-width': '32rem' }"
+      (onLazyLoad)="onLazyLoad($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nombre">Nombre</th>
+          <th pSortableColumn="direccion">Dirección</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-cliente>
+        <tr>
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.direccion }}</td>
+          <td>
+            <p-button
+              icon="pi pi-pencil"
+              text
+              rounded
+              ariaLabel="Editar cliente"
+              (onClick)="abrirEditar(cliente)"
+            ></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </app-data-state>
+
+  <p-dialog
+    header="Cliente"
+    [(visible)]="dialogVisible"
+    [modal]="true"
+    [style]="{ width: '450px' }"
+    (onHide)="cerrarDialogo()"
+  >
+    <app-cliente-form
+      [cliente]="selected"
+      (guardado)="guardar($event)"
+      (cancelado)="cerrarDialogo()"
+    ></app-cliente-form>
+  </p-dialog>
+</div>

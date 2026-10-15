@@ -94,7 +94,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 **Independent Test**: Registrar cliente; crear pedido (2 × 2.50 + 1 × 7.00 → total 12.00); pedido inválido → HTTP 400 (AC-02/03/04/22).
 
 - [x] T029 [US2] **Front test**: listado de clientes (`p-table` lazy) y formulario de alta (validación `nombre`/`direccion` obligatorios) en `frontend/src/app/features/clientes/clientes-list/clientes-list.component.spec.ts` (debe FALLAR primero).
-- [ ] T030 [US2] **Front**: listado de clientes con `p-table` lazy (`page`/`size`) en `frontend/src/app/features/clientes/clientes-list/`.
+- [x] T030 [US2] **Front**: listado de clientes con `p-table` lazy (`page`/`size`) en `frontend/src/app/features/clientes/clientes-list/`.
 - [x] T031 [US2] **Front**: alta/edición de cliente en `p-dialog` (modal 450 px, foco primer input) en `frontend/src/app/features/clientes/cliente-form/`.
 - [ ] T032 [P] [US2] **Test back**: integración de clientes (`POST /api/clientes`; `nombre`/`direccion` obligatorios → 400) en `backend/tests/DeliverySac.Tests/Integration/ClientesEndpointsTests.cs` (debe FALLAR primero).
 - [ ] T033 [US2] **Back**: endpoints `POST /api/clientes`, `GET /api/clientes` (paginado) y `GET /api/clientes/buscar?q=` (autocompletar) en `backend/src/DeliverySac.Api/Controllers/ClientesController.cs`.

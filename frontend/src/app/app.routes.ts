@@ -23,7 +23,10 @@ export const routes: Routes = [
       {
         path: 'clientes',
         canActivate: [roleGuard('Administrador')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/clientes/clientes-list/clientes-list.component').then(
+            (m) => m.ClientesListComponent,
+          ),
         data: { title: 'Clientes', breadcrumb: [{ label: 'Clientes' }] },
       },
       {
