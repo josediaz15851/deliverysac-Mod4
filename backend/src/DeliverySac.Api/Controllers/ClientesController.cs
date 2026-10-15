@@ -65,7 +65,7 @@ public class ClientesController : ControllerBase
         var result = new PagedResult<ClienteDto>
         {
             Items = rows.Select(r => new ClienteDto { Id = r.Id, Nombre = r.Nombre, Direccion = r.Direccion }).ToList(),
-            Total = rows.Count > 0 ? rows[0].Total : 0,
+            Total = rows.Count > 0 ? (int)rows[0].Total : 0,
         };
 
         return Ok(result);
@@ -106,6 +106,6 @@ public class ClientesController : ControllerBase
         public int Id { get; set; }
         public string Nombre { get; set; } = string.Empty;
         public string Direccion { get; set; } = string.Empty;
-        public int Total { get; set; }
+        public long Total { get; set; }
     }
 }
