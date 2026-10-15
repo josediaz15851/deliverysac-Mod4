@@ -8,6 +8,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { CambioEstadoRuta, PedidoRuta, RepartidorService } from '../repartidor.service';
 import { EstadoTagComponent } from '../../../shared/estado-tag/estado-tag.component';
 import { DataStateComponent } from '../../../shared/data-state/data-state.component';
+import { OfflineService } from '../../../core/offline/offline.service';
 
 const ESTADOS_CON_MOTIVO = ['NoEntregado', 'Reprogramado'];
 const ESTADOS_FINALES = ['Entregado'];
@@ -22,6 +23,7 @@ export class RutaDiaComponent implements OnInit {
   private readonly repartidorService = inject(RepartidorService);
   private readonly messageService = inject(MessageService);
   private readonly confirmationService = inject(ConfirmationService);
+  private readonly offlineService = inject(OfflineService);
 
   pedidos: PedidoRuta[] = [];
   loading = false;
@@ -34,6 +36,7 @@ export class RutaDiaComponent implements OnInit {
   private estadoSeleccionado = '';
 
   ngOnInit(): void {
+    this.offlineService.iniciarSincronizacionAutomatica();
     this.cargar();
   }
 
@@ -128,7 +131,20 @@ export class RutaDiaComponent implements OnInit {
         });
         this.cargar();
       },
-      error: () => {
+      error: (error) => {
+        if ((error as { status?: number }).status === 0) {
+          void this.offlineService
+            .encolar({ pedidoId: pedido.id, estadoNuevo: estado, motivo })
+            .then(() =>
+              this.messageService.add({
+                severity: 'info',
+                summary: 'Guardado sin conexión',
+                detail: 'El cambio se enviará automáticamente al recuperar la conexión.',
+              }),
+            );
+          return;
+        }
+
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

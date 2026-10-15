@@ -18,6 +18,10 @@ export class OfflineService {
   private readonly config = inject(ConfigService);
   private readonly messageService = inject(MessageService);
 
+  private autoSyncIniciado = false;
+  private readonly retrasoBaseMs = 3000;
+  private readonly maxIntentos = 5;
+
   async encolar(cambio: CambioEstado, operacionId: string = this.generarId()): Promise<string> {
     const existentes = await this.store.getAll();
     if (existentes.some((operacion) => operacion.operacionId === operacionId)) {
@@ -37,6 +41,25 @@ export class OfflineService {
 
   pendientes(): Promise<OperacionPendiente[]> {
     return this.store.getAll();
+  }
+
+  iniciarSincronizacionAutomatica(): void {
+    if (this.autoSyncIniciado || typeof window === 'undefined') {
+      return;
+    }
+
+    this.autoSyncIniciado = true;
+    window.addEventListener('online', () => void this.reintentarConBackoff(0));
+  }
+
+  async reintentarConBackoff(intento: number): Promise<void> {
+    await this.sincronizar();
+
+    const restantes = await this.store.getAll();
+    if (restantes.length > 0 && intento < this.maxIntentos) {
+      const retraso = this.retrasoBaseMs * 2 ** intento;
+      setTimeout(() => void this.reintentarConBackoff(intento + 1), retraso);
+    }
   }
 
   async sincronizar(): Promise<number> {

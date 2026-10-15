@@ -81,4 +81,18 @@ describe('OfflineService', () => {
     expect((await service.pendientes()).length).toBe(0);
     expect(addSpy).toHaveBeenCalled();
   });
+
+  it('sincroniza automáticamente las operaciones al recuperar la conexión', async () => {
+    await service.encolar({ pedidoId: 3, estadoNuevo: 'EnRuta' }, 'op-online');
+    service.iniciarSincronizacionAutomatica();
+
+    window.dispatchEvent(new Event('online'));
+    await tick();
+
+    const req = httpMock.expectOne('http://test/api/pedidos/3/estados');
+    req.flush(null);
+    await tick();
+
+    expect((await service.pendientes()).length).toBe(0);
+  });
 });

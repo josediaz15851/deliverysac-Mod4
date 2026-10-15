@@ -2,12 +2,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { of } from 'rxjs';
 import { PedidoRuta, RepartidorService } from '../repartidor.service';
+import { OfflineService } from '../../../core/offline/offline.service';
 import { RutaDiaComponent } from './ruta-dia.component';
 
 describe('RutaDiaComponent - cambio de estado', () => {
   let fixture: ComponentFixture<RutaDiaComponent>;
   let component: RutaDiaComponent;
   let service: jasmine.SpyObj<RepartidorService>;
+  let offlineService: jasmine.SpyObj<OfflineService>;
   let confirmationService: ConfirmationService;
 
   const pedidoEnRuta: PedidoRuta = {
@@ -24,12 +26,19 @@ describe('RutaDiaComponent - cambio de estado', () => {
     service.listarRuta.and.returnValue(of([]));
     service.cambiarEstado.and.returnValue(of(void 0));
 
+    offlineService = jasmine.createSpyObj<OfflineService>('OfflineService', [
+      'iniciarSincronizacionAutomatica',
+      'encolar',
+    ]);
+    offlineService.encolar.and.returnValue(Promise.resolve('op-1'));
+
     await TestBed.configureTestingModule({
       imports: [RutaDiaComponent],
       providers: [
         MessageService,
         ConfirmationService,
         { provide: RepartidorService, useValue: service },
+        { provide: OfflineService, useValue: offlineService },
       ],
     }).compileComponents();
 
