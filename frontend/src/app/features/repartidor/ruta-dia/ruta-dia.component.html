@@ -50,6 +50,7 @@
         [(ngModel)]="motivo"
         rows="3"
         [class.ng-invalid]="motivoError"
+        (keydown.enter)="confirmarMotivo()"
       ></textarea>
       @if (motivoError) {
         <small class="ruta-dia__error">El motivo es obligatorio</small>

@@ -194,8 +194,8 @@ componentes (AC-20/AC-21); fechas en America/Lima sin desfase (AC-23).
 
 **Purpose**: Mejoras transversales.
 
-- [ ] T072 [P] **Front test**: accesibilidad (Enter guarda / Esc cancela, `label for`, foco visible) en modales en `frontend/src/app/shared/a11y.spec.ts` (debe FALLAR primero).
-- [ ] T073 [P] **Front**: accesibilidad en `p-dialog`/`p-sidebar` (Enter/Esc, `label for`, foco visible) en `frontend/src/app/shared/`.
+- [x] T072 [P] **Front test**: accesibilidad (Enter guarda / Esc cancela, `label for`, foco visible) en modales en `frontend/src/app/shared/a11y.spec.ts` (debe FALLAR primero).
+- [x] T073 [P] **Front**: accesibilidad en `p-dialog`/`p-sidebar` (Enter/Esc, `label for`, foco visible) en `frontend/src/app/shared/`.
 - [x] T074 [P] **Front test**: consistencia temática y de etiquetas de estado en `frontend/src/app/shared/theme.spec.ts`.
 - [x] T075 [P] **Front**: consistencia temática y etiquetas de estado aplicadas en todas las pantallas (FR-030/FR-036) en `frontend/src/app/shared/`.
 - [x] T076 [P] **Back test**: verificación de rendimiento (P95 ≤ 2 s en listados paginados bajo condiciones normales; SC-002) en `backend/tests/DeliverySac.Tests/Integration/PerformanceTests.cs`.
