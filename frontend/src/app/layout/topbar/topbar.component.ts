@@ -32,6 +32,15 @@ import { AuthService } from '../../core/auth/auth.service';
               <span class="topbar__user-role">{{ currentUser.rol }}</span>
             </div>
           </div>
+          <button
+            type="button"
+            pButton
+            text
+            rounded
+            icon="pi pi-sign-out"
+            ariaLabel="Cerrar sesión"
+            (click)="logout()"
+          ></button>
         }
       </div>
     </header>
@@ -91,5 +100,9 @@ export class TopbarComponent {
 
   toggle(): void {
     this.layoutService.toggleSidebar();
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
