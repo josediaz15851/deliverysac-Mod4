@@ -104,7 +104,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T037 [P] [US2] **Test back**: unit de validación de líneas (`cantidad > 0`, `precioUnitario >= 0`, `descripcion` obligatoria) y cálculo del total en `backend/tests/DeliverySac.Tests/Unit/PedidoTests.cs` (debe FALLAR primero).
 - [x] T038 [US2] **Back**: endpoint `POST /api/pedidos` (rechaza con HTTP 400 sin líneas o líneas inválidas; calcula `total` = Σ(cantidad × precioUnitario)) en `backend/src/DeliverySac.Api/Controllers/PedidosController.cs`.
 - [x] T039 [US2] **Back**: endpoints `GET /api/pedidos` (gestión paginada, incluye `PENDIENTE` sin asignación) y `GET /api/pedidos/{id}` (cabecera + líneas + total) en `backend/src/DeliverySac.Api/Controllers/PedidosController.cs`.
-- [ ] T040 [US2] **Front test**: listado de gestión de pedidos (cliente, fecha, estado como Tag, total) en `frontend/src/app/features/pedidos/pedidos-list/pedidos-list.component.spec.ts` (debe FALLAR primero).
+- [x] T040 [US2] **Front test**: listado de gestión de pedidos (cliente, fecha, estado como Tag, total) en `frontend/src/app/features/pedidos/pedidos-list/pedidos-list.component.spec.ts` (debe FALLAR primero).
 - [ ] T041 [US2] **Front**: listado de gestión de pedidos (cliente, fecha de reparto, estado como Tag, total) en `frontend/src/app/features/pedidos/pedidos-list/`.
 
 **Checkpoint**: US1 y US2 funcionales e independientes.
