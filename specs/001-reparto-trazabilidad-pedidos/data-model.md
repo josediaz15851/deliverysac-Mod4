@@ -106,6 +106,8 @@ Modelo derivado de la spec (Key Entities) y de las reglas de negocio del PRD. Ti
 
 ### CambioEstado (traza — inmutable)
 
+> Término de negocio en `spec.md`: "Cambio de Estado (traza)". Entidad técnica: `CambioEstado`.
+
 | Campo | Tipo | Reglas |
 |-------|------|--------|
 | Id | long (PK) | Autogenerado |
@@ -114,7 +116,7 @@ Modelo derivado de la spec (Key Entities) y de las reglas de negocio del PRD. Ti
 | EstadoNuevo | EstadoPedido | Requerido |
 | FechaHora | DateTimeOffset | Requerido; asignado por el servidor (no editable) (FR-016) |
 | UsuarioId | int (FK Usuario) | Requerido; asignado por el servidor (no editable) (FR-016) |
-| Motivo | string? | Obligatorio cuando `EstadoNuevo` ∈ {`NO_ENTREGADO`, `REPROGRAMADO`} (FR-014) |
+| Motivo | string? | Obligatorio (texto libre, 5–200 caracteres) cuando `EstadoNuevo` ∈ {`NO_ENTREGADO`, `REPROGRAMADO`} (FR-014) |
 | OperacionId | guid | Identificador idempotente enviado por el cliente (evita trazas duplicadas al reintentar, R8) |
 
 - **Inmutable**: sin operaciones de actualización/eliminación; no existen endpoints que la modifiquen

@@ -204,8 +204,7 @@ base del entorno activo.
 - ¿Qué ocurre cuando cambia el puerto o dominio de la API? Se ajusta solo la configuración del
   entorno, sin editar componentes.
 - ¿Qué ocurre cuando un cambio de estado guardado sin conexión se sincroniza y el servidor lo
-  rechaza por conflicto? El sistema descarta el cambio local, notifica al repartidor y refresca el
-  estado real del pedido desde el servidor (el servidor es la fuente de verdad).
+  rechaza por conflicto? Se aplica la política definida en FR-022 (registrada en `## Clarifications`).
 
 ## Requirements *(mandatory)*
 
@@ -251,12 +250,13 @@ base del entorno activo.
 - **FR-013**: El sistema MUST permitir al repartidor cambiar el estado de un pedido según la máquina
   de estados `PENDIENTE → ASIGNADO → EN_RUTA → (ENTREGADO | NO_ENTREGADO | REPROGRAMADO)`, y MUST
   rechazar con HTTP 400 las transiciones inválidas.
-- **FR-014**: El sistema MUST exigir el motivo cuando el estado seleccionado sea `NO_ENTREGADO` o
-  `REPROGRAMADO`.
+- **FR-014**: El sistema MUST exigir el motivo (texto libre obligatorio, de 5 a 200 caracteres)
+  cuando el estado seleccionado sea `NO_ENTREGADO` o `REPROGRAMADO`.
 - **FR-015**: El sistema MUST rechazar con HTTP 400 cualquier intento de cambiar el estado de un
   pedido en estado final (`ENTREGADO`).
-- **FR-016**: El sistema MUST registrar de forma automática e inalterable la hora exacta y el ID del
-  usuario responsable en cada cambio de estado.
+- **FR-016**: El sistema MUST registrar de forma automática e inalterable la hora del cambio de estado
+  con precisión de segundos (almacenada en UTC como `DateTimeOffset` y mostrada en America/Lima) y el
+  ID del usuario responsable en cada cambio de estado.
 - **FR-017**: El sistema MUST impedir la modificación o eliminación de trazas históricas; cualquier
   intento de alterar hora o usuario de un cambio existente MUST responder HTTP 405.
 
@@ -358,8 +358,8 @@ base del entorno activo.
 
 - **SC-001**: Al final del día, el 100% de los pedidos asignados tienen un estado final (entregado,
   no entregado o reprogramado) registrado con hora y usuario, sin llamadas telefónicas.
-- **SC-002**: El 95% de las peticiones responde en 2 segundos o menos bajo condiciones normales de
-  red.
+- **SC-002**: El 95% de las peticiones de lectura/listado paginadas (endpoints de consulta) responde
+  en 2 segundos o menos (P95 ≤ 2 s) bajo condiciones normales de red.
 - **SC-003**: Los cambios de estado marcados por el repartidor se reflejan en el panel del
   administrador en 5 segundos o menos.
 - **SC-004**: Los cambios marcados sin conexión se sincronizan automáticamente en 10 segundos o menos
