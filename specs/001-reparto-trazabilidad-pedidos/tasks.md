@@ -149,7 +149,7 @@ automática <= 10 s (AC-16); conflicto → descartar, notificar y refrescar.
 - [x] T057 [US4] **Front test**: `OfflineService` (cola en IndexedDB, idempotencia por `operacionId`, política de conflicto) en `frontend/src/app/core/offline/offline.service.spec.ts` (debe FALLAR primero).
 - [x] T058 [US4] **Front**: `OfflineService` con cola persistida en IndexedDB y `operacionId` idempotente por cambio en `frontend/src/app/core/offline/`.
 - [x] T059 [US4] **Front**: sincronización en segundo plano (evento `online` + reintento con backoff) y política de conflicto (descartar cambio local, Toast, refrescar estado) en `frontend/src/app/core/offline/`.
-- [ ] T060 [US4] **Front**: habilitar service worker PWA para operación sin conexión en `frontend/src/app/core/offline/`.
+- [x] T060 [US4] **Front**: habilitar service worker PWA para operación sin conexión en `frontend/src/app/core/offline/`.
 - [ ] T061 [P] [US4] **Test back**: unit de idempotencia (`operacionId` repetido no duplica traza) en `backend/tests/DeliverySac.Tests/Unit/IdempotenciaTests.cs` (debe FALLAR primero).
 - [ ] T062 [P] [US4] **Test back**: integración AC-16 determinística (simular offline→reconexión y asertar que el cambio encolado se envía y aparece en el panel, sin medir el tiempo real) en `backend/tests/DeliverySac.Tests/Integration/OfflineSyncTests.cs` (debe FALLAR primero).
 - [ ] T063 [US4] **Back**: idempotencia en el endpoint de estados (índice único `OperacionId`) en `backend/src/DeliverySac.Api/Application/EstadoPedidoService.cs`.
