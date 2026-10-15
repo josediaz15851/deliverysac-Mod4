@@ -208,7 +208,7 @@ componentes (AC-20/AC-21); fechas en America/Lima sin desfase (AC-23).
 ## Fase 10 – Incidencias de demo
 
 - [x] T080 [P] **Back**: dejar el CORS libre para la demo permitiendo cualquier origen (`AllowAnyOrigin` + `AllowAnyHeader` + `AllowAnyMethod`) en la política `Frontend` de `backend/src/DeliverySac.Api/Program.cs` (idealmente condicionado a Development); documentar que se endurece en producción.
-- [ ] T081 [P] **Front/Infra**: diagnosticar y corregir el arranque en Opera (pestaña con carga indefinida): verificar/limpiar Service Worker y caché, confirmar compatibilidad del PWA/SW y validar el login en Opera (Brave/Chrome ya funcionan).
+- [x] T081 [P] **Front/Infra**: diagnosticar y corregir el arranque en Opera (pestaña con carga indefinida): verificar/limpiar Service Worker y caché, confirmar compatibilidad del PWA/SW y validar el login en Opera (Brave/Chrome ya funcionan).
 - [x] T082 **Docs**: documentar en `AGENTS.md` y `PRD.md` el CORS libre de demo y la nota de compatibilidad de navegadores (Opera vs Brave/Chrome y limpieza de Service Worker/caché).
 
 ---

@@ -39,7 +39,7 @@ Requisitos completos en `PRD.md` → "Diseño de Interfaz (UX)". Convenciones pa
 - API de desarrollo: `http://localhost:5210` (perfil `http` en `launchSettings.json`). Frontend: `http://localhost:4200` (`ng serve`).
 - Sembrado de datos base (usuarios, unidades, cliente): se ejecuta en Development leyendo `DELIVERYSAC_ADMIN_PASSWORD`.
 - CORS (demo): la política `Frontend` permite cualquier origen para facilitar pruebas desde cualquier navegador/host (`AllowAnyOrigin`); en producción debe endurecerse a los orígenes conocidos.
-- Navegadores: si una pestaña queda cargando indefinidamente (p. ej. Opera con Service Worker/caché de un build previo), limpiar datos del sitio + Service Worker y recargar en duro; validar en Brave/Chrome. El PWA/Service Worker debe ser compatible con Opera.
+- Navegadores: si una pestaña queda cargando indefinidamente (p. ej. Opera con Service Worker/caché de un build previo), el frontend **desregistra automáticamente** Service Workers y limpia cachés en Development (`disableServiceWorkerInDev`), así que basta recargar; si persiste, limpiar datos del sitio + Service Worker y recargar en duro. Validar en Brave/Chrome. El PWA/Service Worker debe ser compatible con Opera.
 
 ## Commits (una subtarea = un commit)
 Antes de cada commit, cargar con la herramienta de skills: `task-commit` y `conventional-commit`.
