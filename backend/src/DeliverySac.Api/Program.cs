@@ -3,6 +3,8 @@ using DeliverySac.Api.Infrastructure.Seed;
 using DeliverySac.Api.Security;
 using Microsoft.EntityFrameworkCore;
 
+const string CorsPolicy = "Frontend";
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Configuration.AddJsonFile(
@@ -16,6 +18,19 @@ var connectionString = Environment.GetEnvironmentVariable("DELIVERYSAC_CONNECTIO
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddProblemDetails();
+
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>()
+    ?? new[] { "http://localhost:4200" };
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(CorsPolicy, policy =>
+        policy.WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
 builder.Services.AddSingleton<IPasswordHasher, PasswordHasher>();
 
 if (!string.IsNullOrWhiteSpace(connectionString))
@@ -26,6 +41,9 @@ if (!string.IsNullOrWhiteSpace(connectionString))
 
 var app = builder.Build();
 
+app.UseExceptionHandler();
+app.UseStatusCodePages();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -33,6 +51,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors(CorsPolicy);
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
 
