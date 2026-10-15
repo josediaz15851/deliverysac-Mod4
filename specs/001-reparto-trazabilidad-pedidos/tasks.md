@@ -57,7 +57,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T012 Sembrar datos base en Development (usuarios por rol, 3 motos lineales + 2 furgonetas, un cliente) leyendo `DELIVERYSAC_ADMIN_PASSWORD` en `backend/src/DeliverySac.Api/Infrastructure/Seed/`.
 - [x] T013 Configurar `appsettings` y lectura de secreto por entorno sin credenciales versionadas en `backend/src/DeliverySac.Api/Program.cs`.
 - [x] T014 Configurar middleware de errores uniforme (ProblemDetails 400/401/403/404/405) y CORS en `backend/src/DeliverySac.Api/Program.cs`.
-- [ ] T015 Implementar hashing bcrypt (coste >= 10) y autenticación/autorización JWT por rol en `backend/src/DeliverySac.Api/Security/`.
+- [x] T015 Implementar hashing bcrypt (coste >= 10) y autenticación/autorización JWT por rol en `backend/src/DeliverySac.Api/Security/`.
 - [ ] T016 Configurar `environment.ts`/`environment.prod.ts` + `ConfigService` con `apiUrl` (sin URLs hardcodeadas) y locales `es-PE` (FR-039) en `frontend/src/app/core/`.
 - [ ] T017 [P] Crear `AuthService` + `authInterceptor` (Bearer) + guard por rol en `frontend/src/app/core/` (test en T023).
 - [ ] T018 Configurar `MessageService`/`<p-toast>` y `ConfirmationService`/`p-confirmDialog` globales en `frontend/src/app/layout/`.
