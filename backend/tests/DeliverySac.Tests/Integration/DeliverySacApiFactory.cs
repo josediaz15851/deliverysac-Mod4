@@ -17,6 +17,9 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Testing");
+        builder.UseSetting("Jwt:Key", "clave-de-pruebas-para-firmar-tokens-0123456789");
+        builder.UseSetting("Jwt:Issuer", "DeliverySac");
+        builder.UseSetting("Jwt:Audience", "DeliverySac");
 
         builder.ConfigureServices(services =>
         {

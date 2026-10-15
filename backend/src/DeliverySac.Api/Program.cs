@@ -20,6 +20,7 @@ var connectionString = Environment.GetEnvironmentVariable("DELIVERYSAC_CONNECTIO
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 builder.Services.AddProblemDetails();
 
@@ -97,6 +98,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapGet("/health", () => Results.Ok(new { status = "ok" }));
+
+app.MapControllers();
 
 await SeedDatabaseAsync(app);
 
