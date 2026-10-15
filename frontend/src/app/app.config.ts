@@ -2,6 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection, isDevMode, LOCALE_ID } f
 import { registerLocaleData } from '@angular/common';
 import localeEsPe from '@angular/common/locales/es-PE';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
 import { ConfirmationService, MessageService } from 'primeng/api';
@@ -18,13 +19,14 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
+    provideAnimationsAsync(),
+    providePrimeNG({ theme: { preset: DeliverySacPreset } }),
     MessageService,
     ConfirmationService,
     { provide: LOCALE_ID, useValue: 'es-PE' },
-    { provide: LOCALE_ID, useValue: 'es-PE' },
-    providePrimeNG({ theme: { preset: DeliverySacPreset } }), provideServiceWorker('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            registrationStrategy: 'registerWhenStable:30000'
-          })
-  ]
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
+  ],
 };
