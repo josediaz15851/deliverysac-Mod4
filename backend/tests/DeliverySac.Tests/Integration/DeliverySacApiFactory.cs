@@ -46,6 +46,30 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
         var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher>();
         await DbSeeder.SeedAsync(db, hasher, AdminPassword, NullLogger.Instance);
 
+        if (!await db.Unidades.AnyAsync())
+        {
+            db.Unidades.Add(new Unidad
+            {
+                Identificador = "MOTO-TEST",
+                Tipo = TipoUnidad.MotoLineal,
+                Activo = true,
+            });
+            await db.SaveChangesAsync();
+        }
+
+        if (!await db.Usuarios.AnyAsync(u => u.Rol == RolUsuario.Repartidor))
+        {
+            db.Usuarios.Add(new Usuario
+            {
+                NombreUsuario = "repartidor.test",
+                NombreCompleto = "Repartidor de Prueba",
+                PasswordHash = hasher.Hash(AdminPassword),
+                Rol = RolUsuario.Repartidor,
+                Activo = true,
+            });
+            await db.SaveChangesAsync();
+        }
+
         if (!await db.Usuarios.AnyAsync(u => u.NombreUsuario == AdminUser))
         {
             db.Usuarios.Add(new Usuario
