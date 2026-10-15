@@ -97,7 +97,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T030 [US2] **Front**: listado de clientes con `p-table` lazy (`page`/`size`) en `frontend/src/app/features/clientes/clientes-list/`.
 - [x] T031 [US2] **Front**: alta/edición de cliente en `p-dialog` (modal 450 px, foco primer input) en `frontend/src/app/features/clientes/cliente-form/`.
 - [x] T032 [P] [US2] **Test back**: integración de clientes (`POST /api/clientes`; `nombre`/`direccion` obligatorios → 400) en `backend/tests/DeliverySac.Tests/Integration/ClientesEndpointsTests.cs` (debe FALLAR primero).
-- [ ] T033 [US2] **Back**: endpoints `POST /api/clientes`, `GET /api/clientes` (paginado) y `GET /api/clientes/buscar?q=` (autocompletar) en `backend/src/DeliverySac.Api/Controllers/ClientesController.cs`.
+- [x] T033 [US2] **Back**: endpoints `POST /api/clientes`, `GET /api/clientes` (paginado) y `GET /api/clientes/buscar?q=` (autocompletar) en `backend/src/DeliverySac.Api/Controllers/ClientesController.cs`.
 - [ ] T034 [US2] **Front test**: formulario de pedido (líneas dinámicas, total, selección de cliente sin campos de ID) en `frontend/src/app/features/pedidos/pedido-form/pedido-form.component.spec.ts` (debe FALLAR primero).
 - [ ] T035 [US2] **Front**: pantalla crear pedido con líneas dinámicas y selección de cliente por autocompletar (sin campos de ID) en `frontend/src/app/features/pedidos/pedido-form/`.
 - [ ] T036 [P] [US2] **Test back**: integración AC-03/AC-04/AC-22 (rechazo HTTP 400, total exacto, pedido PENDIENTE en gestión) en `backend/tests/DeliverySac.Tests/Integration/PedidosEndpointsTests.cs` (debe FALLAR primero).
