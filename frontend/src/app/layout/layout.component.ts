@@ -1,0 +1,15 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+@Component({
+  selector: 'app-layout',
+  imports: [RouterOutlet, ToastModule, ConfirmDialogModule],
+  template: `
+    <p-toast position="top-right"></p-toast>
+    <p-confirmDialog></p-confirmDialog>
+    <router-outlet></router-outlet>
+  `,
+})
+export class LayoutComponent {}

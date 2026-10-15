@@ -4,6 +4,7 @@ import localeEsPe from '@angular/common/locales/es-PE';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { providePrimeNG } from 'primeng/config';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
@@ -17,6 +18,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
+    MessageService,
+    ConfirmationService,
     { provide: LOCALE_ID, useValue: 'es-PE' },
     { provide: LOCALE_ID, useValue: 'es-PE' },
     providePrimeNG({ theme: { preset: DeliverySacPreset } }), provideServiceWorker('ngsw-worker.js', {

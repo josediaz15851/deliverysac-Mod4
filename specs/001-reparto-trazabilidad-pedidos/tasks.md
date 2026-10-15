@@ -60,7 +60,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T015 Implementar hashing bcrypt (coste >= 10) y autenticación/autorización JWT por rol en `backend/src/DeliverySac.Api/Security/`.
 - [x] T016 Configurar `environment.ts`/`environment.prod.ts` + `ConfigService` con `apiUrl` (sin URLs hardcodeadas) y locales `es-PE` (FR-039) en `frontend/src/app/core/`.
 - [x] T017 [P] Crear `AuthService` + `authInterceptor` (Bearer) + guard por rol en `frontend/src/app/core/` (test en T023).
-- [ ] T018 Configurar `MessageService`/`<p-toast>` y `ConfirmationService`/`p-confirmDialog` globales en `frontend/src/app/layout/`.
+- [x] T018 Configurar `MessageService`/`<p-toast>` y `ConfirmationService`/`p-confirmDialog` globales en `frontend/src/app/layout/`.
 - [ ] T019 [P] **Front test**: componente `data-state` (skeleton en carga, estado vacío "No se encontraron registros", contenido con datos) en `frontend/src/app/shared/data-state/data-state.component.spec.ts` (debe FALLAR primero).
 - [ ] T020 **Front**: componente compartido `data-state` (carga/vacío, FR-033) reutilizable en `frontend/src/app/shared/data-state/`.
 - [ ] T021 Implementar shell Sakai (`app-topbar`, `app-sidebar` colapsable, `app-footer`) con título de página + breadcrumb y resaltado de sección activa en `frontend/src/app/layout/`.
