@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MessageService } from 'primeng/api';
 import { of } from 'rxjs';
-import { PedidoDia, PedidosService } from '../../pedidos/pedidos.service';
+import { PedidoDia, PedidosService } from '../pedidos/pedidos.service';
 import { ListadoDiaComponent } from './listado-dia.component';
 
 describe('ListadoDiaComponent', () => {
@@ -44,12 +44,16 @@ describe('ListadoDiaComponent', () => {
 
   it('refresca automáticamente cada 5 segundos', () => {
     jasmine.clock().install();
-    component.ngOnInit();
-    const llamadas = service.listarDia.calls.count();
+    fixture.destroy();
+
+    fixture = TestBed.createComponent(ListadoDiaComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    service.listarDia.calls.reset();
 
     jasmine.clock().tick(5000);
 
-    expect(service.listarDia.calls.count()).toBe(llamadas + 1);
+    expect(service.listarDia.calls.count()).toBe(1);
     jasmine.clock().uninstall();
   });
 

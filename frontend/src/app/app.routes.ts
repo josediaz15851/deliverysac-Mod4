@@ -1,9 +1,6 @@
 import { Routes } from '@angular/router';
 import { roleGuard } from './core/auth/role.guard';
 
-const placeholder = () =>
-  import('./shared/placeholder/placeholder.component').then((m) => m.PlaceholderComponent);
-
 export const routes: Routes = [
   {
     path: 'login',
@@ -62,7 +59,8 @@ export const routes: Routes = [
       {
         path: 'panel-dia',
         canActivate: [roleGuard('Administrador', 'Supervisor')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/listado-dia/listado-dia.component').then((m) => m.ListadoDiaComponent),
         data: { title: 'Panel del día', breadcrumb: [{ label: 'Panel del día' }] },
       },
       {

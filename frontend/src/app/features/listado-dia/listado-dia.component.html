@@ -1,0 +1,43 @@
+<div class="panel-dia">
+  @if (sinConexion) {
+    <div class="panel-dia__offline" role="status">
+      <i class="pi pi-wifi" aria-hidden="true"></i>
+      <span>SIN CONEXIÓN</span>
+    </div>
+  }
+
+  <h1 class="panel-dia__title">Panel del día</h1>
+
+  <app-data-state [loading]="loading" [empty]="pedidos.length === 0">
+    <p-table
+      [value]="pedidos"
+      [lazy]="true"
+      (onLazyLoad)="onLazyLoad($event)"
+      [paginator]="true"
+      [rows]="size"
+      [totalRecords]="total"
+      [tableStyle]="{ 'min-width': '48rem' }"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Cliente</th>
+          <th>Dirección</th>
+          <th>Estado</th>
+          <th>Última hora</th>
+          <th>Motivo</th>
+          <th>Repartidor</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-pedido>
+        <tr>
+          <td>{{ pedido.clienteNombre }}</td>
+          <td>{{ pedido.direccion }}</td>
+          <td><app-estado-tag [estado]="pedido.estado"></app-estado-tag></td>
+          <td>{{ pedido.fechaHoraCambio ? (pedido.fechaHoraCambio | date: 'short') : '—' }}</td>
+          <td>{{ pedido.motivo || '—' }}</td>
+          <td>{{ pedido.repartidorNombre || '—' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </app-data-state>
+</div>

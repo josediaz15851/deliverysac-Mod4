@@ -166,8 +166,8 @@ automática <= 10 s (AC-16); conflicto → descartar, notificar y refrescar.
 refresco cada 5 s; banner "SIN CONEXIÓN" al perder red (AC-12/13/18/19).
 
 - [x] T064 [US5] **Front test**: panel del día (render estado/hora/motivo, refresco 5 s, banner "SIN CONEXIÓN") en `frontend/src/app/features/listado-dia/listado-dia.component.spec.ts` (debe FALLAR primero).
-- [ ] T065 [US5] **Front**: panel del día (admin/supervisor, `p-table` lazy) con estado (Tag), hora de última modificación y motivo, en `frontend/src/app/features/listado-dia/`.
-- [ ] T066 [US5] **Front**: refresco automático cada 5 s e indicador visual "SIN CONEXIÓN" (oculta en < 2 s al recuperar) en `frontend/src/app/features/listado-dia/`.
+- [x] T065 [US5] **Front**: panel del día (admin/supervisor, `p-table` lazy) con estado (Tag), hora de última modificación y motivo, en `frontend/src/app/features/listado-dia/`.
+- [x] T066 [US5] **Front**: refresco automático cada 5 s e indicador visual "SIN CONEXIÓN" (oculta en < 2 s al recuperar) en `frontend/src/app/features/listado-dia/`.
 - [x] T067 [P] [US5] **Test back**: integración AC-12/AC-13 (incluye `REPROGRAMADO` de días previos; sin conexión usa cache local) en `backend/tests/DeliverySac.Tests/Integration/ListadoDiaTests.cs` (debe FALLAR primero).
 - [x] T068 [US5] **Back**: endpoint `GET /api/pedidos/dia` (pedidos de hoy + `REPROGRAMADO` de días anteriores; rol admin/supervisor) en `backend/src/DeliverySac.Api/Controllers/PedidosController.cs`.
 

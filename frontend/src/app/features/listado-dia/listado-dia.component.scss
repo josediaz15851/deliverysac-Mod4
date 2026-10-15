@@ -1,0 +1,22 @@
+.panel-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.panel-dia__title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.panel-dia__offline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background: var(--red-500, #d32f2f);
+  border-radius: 0.5rem;
+}
