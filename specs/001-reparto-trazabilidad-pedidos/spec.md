@@ -8,6 +8,12 @@
 
 **Input**: User description: "alimentado con tu PRD" (PRD-001: DeliverySac - Reparto y Trazabilidad de Pedidos)
 
+## Clarifications
+
+### Session 2026-10-14
+
+- Q: Cuando un cambio de estado guardado sin conexión se reintenta y el servidor lo rechaza porque el pedido ya cambió (avanzó de estado, fue reasignado o alcanzó estado final), ¿qué debe hacer el sistema? → A: El servidor es la fuente de verdad: descartar el cambio local, notificar al repartidor y refrescar el estado real del pedido desde el servidor.
+
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Autenticación por rol y sesión (Priority: P1)
@@ -197,6 +203,9 @@ base del entorno activo.
   de estado existente? El sistema responde HTTP 405 (no existe endpoint de edición de trazabilidad).
 - ¿Qué ocurre cuando cambia el puerto o dominio de la API? Se ajusta solo la configuración del
   entorno, sin editar componentes.
+- ¿Qué ocurre cuando un cambio de estado guardado sin conexión se sincroniza y el servidor lo
+  rechaza por conflicto? El sistema descarta el cambio local, notifica al repartidor y refresca el
+  estado real del pedido desde el servidor (el servidor es la fuente de verdad).
 
 ## Requirements *(mandatory)*
 
@@ -268,7 +277,10 @@ base del entorno activo.
 
 - **FR-022**: El sistema MUST almacenar localmente en el celular del repartidor los cambios de estado
   ante interrupción de red y reintentar la sincronización en segundo plano de forma automática al
-  recuperar la conectividad (plazo máximo 10 segundos), sin intervención del usuario.
+  recuperar la conectividad (plazo máximo 10 segundos), sin intervención del usuario. Ante un
+  rechazo por conflicto (el pedido ya cambió, fue reasignado o alcanzó un estado final), el servidor
+  es la fuente de verdad: el sistema MUST descartar el cambio local, notificar al repartidor y
+  refrescar el estado real del pedido desde el servidor, sin sobrescribir la trazabilidad válida.
 - **FR-023**: El frontend MUST verificar conectividad y refrescar los datos locales cada 5 segundos
   cuando haya conexión disponible.
 - **FR-024**: El sistema MUST mostrar un indicador visual prominente en el panel del administrador y
