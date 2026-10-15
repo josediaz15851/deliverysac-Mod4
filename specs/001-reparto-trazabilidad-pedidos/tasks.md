@@ -76,7 +76,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 
 **Independent Test**: Iniciar sesión con cada rol y verificar redirección; "Cerrar sesión" invalida la sesión (AC-01, AC-24).
 
-- [ ] T023 [US1] **Front test**: `AuthService` (guarda token, maneja 401) y componente de login (validación, error inline) en `frontend/src/app/features/auth/login/login.component.spec.ts` (debe FALLAR primero).
+- [x] T023 [US1] **Front test**: `AuthService` (guarda token, maneja 401) y componente de login (validación, error inline) en `frontend/src/app/features/auth/login/login.component.spec.ts` (debe FALLAR primero).
 - [ ] T024 [US1] **Front**: pantalla de login split-screen glassmorphism (tabs por rol, validación, error inline) en `frontend/src/app/features/auth/login/`.
 - [ ] T025 [US1] **Front**: conectar formulario de login a `AuthService` (guarda token, maneja 401 con Toast) en `frontend/src/app/features/auth/login/` — cableado preparado para el back de T027.
 - [ ] T026 [P] [US1] **Test back**: integración de login (credenciales válidas → token con rol; inválidas → 401) en `backend/tests/DeliverySac.Tests/Integration/AuthEndpointsTests.cs` (debe FALLAR primero).
