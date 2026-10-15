@@ -1,3 +1,4 @@
+using System.Security.Authentication;
 using System.Text;
 using DeliverySac.Api.Infrastructure;
 using DeliverySac.Api.Infrastructure.Seed;
@@ -9,6 +10,14 @@ using Microsoft.IdentityModel.Tokens;
 const string CorsPolicy = "Frontend";
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ConfigureHttpsDefaults(https =>
+    {
+        https.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls13;
+    });
+});
 
 builder.Configuration.AddJsonFile(
     "appsettings.Development.local.json",
@@ -87,6 +96,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
