@@ -124,6 +124,71 @@ public class PedidosController : ControllerBase
         return Ok(result);
     }
 
+    [HttpGet("dia")]
+    [Authorize(Roles = "Administrador,Supervisor")]
+    public async Task<ActionResult<PagedResult<PedidoDiaDto>>> ListarDia(
+        [FromQuery] int page = 1,
+        [FromQuery] int size = 10,
+        CancellationToken cancellationToken = default)
+    {
+        var currentPage = page < 1 ? 1 : page;
+        var pageSize = size is < 1 or > 100 ? 10 : size;
+        var offset = (currentPage - 1) * pageSize;
+
+        const string sql = """
+            SELECT p.Id, c.Nombre AS ClienteNombre, c.Direccion, p.FechaReparto, p.Estado,
+                   ultimo.Motivo AS Motivo, ultimo.FechaHora AS FechaHoraCambio,
+                   rep.NombreUsuario AS RepartidorNombre,
+                   COUNT(*) OVER() AS TotalRegistros
+            FROM Pedidos p
+            INNER JOIN Clientes c ON c.Id = p.ClienteId
+            OUTER APPLY (
+                SELECT TOP 1 ce.Motivo, ce.FechaHora
+                FROM CambiosEstado ce
+                WHERE ce.PedidoId = p.Id
+                ORDER BY ce.FechaHora DESC, ce.Id DESC
+            ) ultimo
+            OUTER APPLY (
+                SELECT TOP 1 u.NombreUsuario
+                FROM Asignaciones a
+                INNER JOIN Usuarios u ON u.Id = a.RepartidorId
+                WHERE a.PedidoId = p.Id AND a.Activa = 1
+            ) rep
+            WHERE p.FechaReparto = @Hoy OR p.Estado = @Reprogramado
+            ORDER BY p.Id DESC
+            OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY;
+            """;
+
+        var connection = _db.Database.GetDbConnection();
+        var rows = (await connection.QueryAsync<PedidoDiaRow>(
+            sql,
+            new
+            {
+                Offset = offset,
+                PageSize = pageSize,
+                Hoy = DateOnly.FromDateTime(DateTime.UtcNow).ToDateTime(TimeOnly.MinValue),
+                Reprogramado = (int)EstadoPedido.Reprogramado,
+            })).ToList();
+
+        var result = new PagedResult<PedidoDiaDto>
+        {
+            Items = rows.Select(r => new PedidoDiaDto
+            {
+                Id = r.Id,
+                ClienteNombre = r.ClienteNombre,
+                Direccion = r.Direccion,
+                FechaReparto = DateOnly.FromDateTime(r.FechaReparto),
+                Estado = ((EstadoPedido)r.Estado).ToString(),
+                Motivo = r.Motivo,
+                FechaHoraCambio = r.FechaHoraCambio,
+                RepartidorNombre = r.RepartidorNombre,
+            }).ToList(),
+            Total = rows.Count > 0 ? (int)rows[0].TotalRegistros : 0,
+        };
+
+        return Ok(result);
+    }
+
     [HttpGet("{id:int}")]
     [Authorize(Roles = "Administrador")]
     public async Task<ActionResult<PedidoDetalleDto>> ObtenerPorId(int id, CancellationToken cancellationToken)
@@ -221,6 +286,19 @@ public class PedidosController : ControllerBase
         public DateTime FechaReparto { get; set; }
         public int Estado { get; set; }
         public decimal Total { get; set; }
+        public long TotalRegistros { get; set; }
+    }
+
+    private sealed class PedidoDiaRow
+    {
+        public int Id { get; set; }
+        public string ClienteNombre { get; set; } = string.Empty;
+        public string Direccion { get; set; } = string.Empty;
+        public DateTime FechaReparto { get; set; }
+        public int Estado { get; set; }
+        public string? Motivo { get; set; }
+        public DateTimeOffset? FechaHoraCambio { get; set; }
+        public string? RepartidorNombre { get; set; }
         public long TotalRegistros { get; set; }
     }
 

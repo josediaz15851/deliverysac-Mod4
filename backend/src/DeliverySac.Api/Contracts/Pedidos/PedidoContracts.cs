@@ -52,3 +52,15 @@ public class PedidoDetalleDto : PedidoDto
     public string? Comentario { get; set; }
     public List<PedidoLineaDto> Lineas { get; set; } = new();
 }
+
+public class PedidoDiaDto
+{
+    public int Id { get; set; }
+    public string ClienteNombre { get; set; } = string.Empty;
+    public string Direccion { get; set; } = string.Empty;
+    public DateOnly FechaReparto { get; set; }
+    public string Estado { get; set; } = string.Empty;
+    public string? Motivo { get; set; }
+    public DateTimeOffset? FechaHoraCambio { get; set; }
+    public string? RepartidorNombre { get; set; }
+}
