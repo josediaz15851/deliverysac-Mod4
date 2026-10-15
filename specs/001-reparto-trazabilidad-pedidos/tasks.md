@@ -146,7 +146,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 **Independent Test**: Marcar estado sin conexión y, al recuperar señal, verificar sincronización
 automática <= 10 s (AC-16); conflicto → descartar, notificar y refrescar.
 
-- [ ] T057 [US4] **Front test**: `OfflineService` (cola en IndexedDB, idempotencia por `operacionId`, política de conflicto) en `frontend/src/app/core/offline/offline.service.spec.ts` (debe FALLAR primero).
+- [x] T057 [US4] **Front test**: `OfflineService` (cola en IndexedDB, idempotencia por `operacionId`, política de conflicto) en `frontend/src/app/core/offline/offline.service.spec.ts` (debe FALLAR primero).
 - [ ] T058 [US4] **Front**: `OfflineService` con cola persistida en IndexedDB y `operacionId` idempotente por cambio en `frontend/src/app/core/offline/`.
 - [ ] T059 [US4] **Front**: sincronización en segundo plano (evento `online` + reintento con backoff) y política de conflicto (descartar cambio local, Toast, refrescar estado) en `frontend/src/app/core/offline/`.
 - [ ] T060 [US4] **Front**: habilitar service worker PWA para operación sin conexión en `frontend/src/app/core/offline/`.
