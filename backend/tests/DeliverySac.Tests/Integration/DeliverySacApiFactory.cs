@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace DeliverySac.Tests.Integration;
 
@@ -52,6 +55,26 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
 
             await db.SaveChangesAsync();
         }
+    }
+
+    public async Task<HttpClient> CreateAuthenticatedClientAsync()
+    {
+        var client = CreateClient();
+
+        var loginResponse = await client.PostAsJsonAsync("/api/auth/login", new
+        {
+            nombreUsuario = AdminUser,
+            password = AdminPassword,
+        });
+
+        loginResponse.EnsureSuccessStatusCode();
+
+        var payload = await loginResponse.Content.ReadFromJsonAsync<JsonElement>();
+        var token = payload.GetProperty("token").GetString();
+
+        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+        return client;
     }
 
     private static string ResolveConnectionString()
