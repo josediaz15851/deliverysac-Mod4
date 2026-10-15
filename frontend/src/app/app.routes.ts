@@ -32,7 +32,10 @@ export const routes: Routes = [
       {
         path: 'pedidos',
         canActivate: [roleGuard('Administrador')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/pedidos/pedidos-list/pedidos-list.component').then(
+            (m) => m.PedidosListComponent,
+          ),
         data: { title: 'Pedidos', breadcrumb: [{ label: 'Pedidos' }] },
       },
       {

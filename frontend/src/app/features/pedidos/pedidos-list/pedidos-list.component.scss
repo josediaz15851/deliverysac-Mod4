@@ -1,0 +1,16 @@
+.pedidos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pedidos-list__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pedidos-list__header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}

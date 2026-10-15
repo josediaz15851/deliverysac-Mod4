@@ -1,0 +1,38 @@
+<div class="pedidos-list">
+  <div class="pedidos-list__header">
+    <h2>Pedidos</h2>
+    <p-button label="Nuevo pedido" icon="pi pi-plus" (onClick)="nuevo()"></p-button>
+  </div>
+
+  <app-data-state [loading]="loading" [empty]="!loading && pedidos.length === 0">
+    <p-table
+      [value]="pedidos"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="size"
+      [totalRecords]="total"
+      [tableStyle]="{ 'min-width': '40rem' }"
+      (onLazyLoad)="onLazyLoad($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="clienteNombre">Cliente</th>
+          <th pSortableColumn="fechaReparto">Fecha de reparto</th>
+          <th>Estado</th>
+          <th>Total</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-pedido>
+        <tr>
+          <td>{{ pedido.clienteNombre }}</td>
+          <td>{{ pedido.fechaReparto | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <p-tag [value]="etiqueta(pedido.estado)" [severity]="severity(pedido.estado)"></p-tag>
+          </td>
+          <td>{{ pedido.total | currency: 'USD' : 'symbol' : '1.2-2' : 'en-US' }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </app-data-state>
+</div>
