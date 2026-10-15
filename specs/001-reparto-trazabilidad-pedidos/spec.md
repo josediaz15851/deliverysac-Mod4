@@ -227,7 +227,7 @@ base del entorno activo.
 - **FR-005**: El sistema MUST validar cada línea (producto, cantidad > 0, precio unitario >= 0 y
   descripción obligatoria) y rechazar con HTTP 400 las solicitudes que no cumplan.
 - **FR-006**: El sistema MUST calcular automáticamente el monto total del pedido como la suma de
-  cantidad por precio unitario de sus líneas.
+  cantidad por precio unitario de sus líneas, con precisión de 2 decimales (redondeo bancario).
 
 **Asignación**
 
@@ -263,7 +263,8 @@ base del entorno activo.
 **Listados y visibilidad**
 
 - **FR-018**: El sistema MUST mostrar al administrador y al supervisor el listado paginado de los
-  pedidos del día con su estado actual, hora de última modificación y motivo en caso de incidencias.
+  pedidos del día (entendiendo "del día" según la fecha de reparto en America/Lima) con su estado
+  actual, hora de última modificación y motivo en caso de incidencias.
 - **FR-019**: El sistema MUST incluir en el listado de la fecha actual los pedidos con estado
   `REPROGRAMADO` de días anteriores.
 - **FR-020**: El sistema MUST exponer al administrador un listado de gestión con todos los pedidos
@@ -277,15 +278,18 @@ base del entorno activo.
 
 - **FR-022**: El sistema MUST almacenar localmente en el celular del repartidor los cambios de estado
   ante interrupción de red y reintentar la sincronización en segundo plano de forma automática al
-  recuperar la conectividad (plazo máximo 10 segundos), sin intervención del usuario. Ante un
+  recuperar la conectividad (plazo máximo de 10 segundos, contados desde que se recupera la conexión),
+  sin intervención del usuario. Ante un
   rechazo por conflicto (el pedido ya cambió, fue reasignado o alcanzó un estado final), el servidor
   es la fuente de verdad: el sistema MUST descartar el cambio local, notificar al repartidor y
   refrescar el estado real del pedido desde el servidor, sin sobrescribir la trazabilidad válida.
 - **FR-023**: El frontend MUST verificar conectividad y refrescar los datos locales cada 5 segundos
-  cuando haya conexión disponible.
+  cuando haya conexión disponible (mediante sondeo periódico; el sondeo se pausa mientras la pestaña
+  no está visible).
 - **FR-024**: El sistema MUST mostrar un indicador visual prominente en el panel del administrador y
-  del supervisor cuando no haya conexión, y retirarlo en menos de 2 segundos al recuperarla; sin
-  conexión MUST mostrar la última versión guardada localmente.
+  del supervisor cuando no haya conexión (banner rojo fijo con el texto "SIN CONEXIÓN"), y retirarlo
+  en menos de 2 segundos al recuperarla; sin conexión MUST mostrar la última versión guardada
+  localmente.
 
 **Configuración, seguridad y zona horaria**
 
@@ -310,7 +314,7 @@ base del entorno activo.
 - **FR-031**: La selección de entidades relacionadas (cliente, repartidor, unidad) MUST realizarse por
   nombre mediante búsqueda predictiva o modal con tabla paginada y búsqueda; queda prohibido exponer
   o capturar identificadores internos como campo de entrada (se prohíben los combos salvo conjuntos
-  pequeños y fijos).
+  pequeños y fijos, entendidos como hasta 20 opciones).
 - **FR-032**: La retroalimentación MUST ser uniforme: notificaciones tipo Toast para éxito/error y
   confirmación mediante diálogo para acciones irreversibles (reasignar, marcar estado final); queda
   prohibido el uso de diálogos nativos del navegador.
@@ -328,12 +332,21 @@ base del entorno activo.
   éxito verde, advertencia ámbar, error rojo) y mostrar cada estado del pedido con una etiqueta de
   color distinta.
 - **FR-037**: El panel del repartidor MUST usar una maquetación de una sola columna, mobile-first
-  desde 320px, sin menú lateral y con acciones táctiles grandes; los paneles de administrador y
-  supervisor MUST usar menú lateral colapsable (colapsable en <= 640px).
+  desde 320px, sin menú lateral y con acciones táctiles grandes (área táctil mínima de 44×44 px);
+  los paneles de administrador y supervisor MUST usar menú lateral colapsable (colapsable en
+  <= 640px).
 - **FR-038**: Los listados MUST usar el componente de tabla institucional con paginación integrada
   (`page`/`size`) y modo responsive; queda prohibido el uso de tablas HTML nativas.
 - **FR-039**: Las fechas y números MUST formatearse en el locale `es-PE`, coherente con la zona
   horaria America/Lima.
+
+**Concurrencia y configuración sensible**
+
+- **FR-040**: El sistema MUST hacer idempotentes los cambios de estado: reenviar la misma operación
+  (mismo identificador) no MUST duplicar la traza ni el efecto sobre el estado del pedido.
+- **FR-041**: El sistema MUST obtener la cadena de conexión y cualquier secreto desde variables de
+  entorno o archivos locales no versionados, sin credenciales en el código ni en archivos
+  versionados.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -376,6 +389,8 @@ base del entorno activo.
   frontend.
 - **SC-010**: El 100% de los pedidos de un listado paginado respeta los límites solicitados en
   `page`/`size`.
+- **SC-011**: El 100% de los accesos no autorizados (rol incorrecto o pedido ajeno) se rechaza con
+  HTTP 403, y toda edición/reasignación inválida se rechaza con HTTP 400.
 
 ## Assumptions
 
@@ -387,8 +402,20 @@ base del entorno activo.
   implementación.
 - Existe un único administrador operativo por día que crea pedidos y asigna; no se contempla
   arquitectura multiempresa/multi-sucursal.
-- La cola offline del repartidor vive en el almacenamiento del navegador móvil (PWA/Web móvil); no
-  se desarrolla una aplicación móvil nativa.
+- Los usuarios, las unidades (3 motos lineales y 2 furgonetas) y un cliente base se siembran en el
+  entorno de desarrollo; **no existe CRUD administrativo de repartidores ni de unidades** (solo
+  catálogos de consulta). Los clientes sí tienen alta/edición (FR-003).
+- No se modela disponibilidad ni programación de unidades/repartidores: si un repartidor o unidad no
+  está disponible, el administrador reasigna el pedido (FR-009).
+- La cola offline del repartidor vive en el almacenamiento del navegador móvil (PWA/Web móvil) y su
+  tamaño es acotado por el volumen diario (decenas de pedidos); no se define expulsión más allá de
+  descartar operaciones inválidas (FR-022). No se desarrolla una aplicación móvil nativa.
+- No se define retención ni borrado automático de pedidos y trazas: los datos se conservan por
+  auditoría; la depuración/archivado está fuera de alcance.
+- No se definen requisitos de observabilidad (logging/métricas/trazado APM) por estar fuera del
+  alcance del PRD; se usa el logging por defecto de la plataforma.
+- Volumen esperado: un administrador operativo, ~5 unidades y decenas de pedidos por día; los
+  listados paginan con `page`/`size` (FR-021).
 - El servidor backend está disponible en el horario operativo de reparto (06:00 a 20:00 horas).
 - La red móvil celular (4G/3G) tiene estabilidad básica para las sincronizaciones periódicas en ruta.
 - El sistema se opera bajo la zona horaria de Perú (America/Lima) y el locale `es-PE`.

@@ -10,81 +10,81 @@
 
 ## Requirement Completeness
 
-- [ ] CHK001 Are the roles and the exact screens each role may access fully enumerated? [Completeness, Spec §FR-001, §FR-002]
-- [ ] CHK002 Are validation rules for every line field (producto, cantidad, precio unitario, descripción) specified with boundary values? [Completeness, Spec §FR-005]
-- [ ] CHK003 Are "motivo" requirements specified (free text vs enumerated, minimum length, allowed characters)? [Gap, Spec §FR-014]
-- [ ] CHK004 Is the complete order state machine documented with every allowed transition and terminal state? [Completeness, Spec §FR-013, §FR-015]
-- [ ] CHK005 Are management requirements defined for repartidores and unidades (create/edit/retire) or explicitly declared out of admin scope? [Gap]
-- [ ] CHK006 Are requirements defined for what happens to an assignment when its repartidor or unidad becomes unavailable? [Gap]
-- [ ] CHK007 Is the exact set of fields shown for the order "cabecera" and each "detalle" line documented? [Completeness, Spec §FR-012]
-- [ ] CHK008 Are loading, empty, and error-state requirements defined for every data-bearing screen? [Completeness, Spec §FR-033]
-- [ ] CHK009 Are offline queue persistence, capacity, and eviction requirements specified? [Gap, Spec §FR-022]
-- [ ] CHK010 Is a retention/lifecycle requirement for orders and immutable trace records documented? [Gap, Spec §FR-016, §FR-017]
+- [x] CHK001 Are the roles and the exact screens each role may access fully enumerated? [Completeness, Spec §FR-001, §FR-002]
+- [x] CHK002 Are validation rules for every line field (producto, cantidad, precio unitario, descripción) specified with boundary values? [Completeness, Spec §FR-005]
+- [x] CHK003 Are "motivo" requirements specified (free text vs enumerated, minimum length, allowed characters)? [Gap, Spec §FR-014]
+- [x] CHK004 Is the complete order state machine documented with every allowed transition and terminal state? [Completeness, Spec §FR-013, §FR-015]
+- [x] CHK005 Are management requirements defined for repartidores and unidades (create/edit/retire) or explicitly declared out of admin scope? [Gap]
+- [x] CHK006 Are requirements defined for what happens to an assignment when its repartidor or unidad becomes unavailable? [Gap]
+- [x] CHK007 Is the exact set of fields shown for the order "cabecera" and each "detalle" line documented? [Completeness, Spec §FR-012]
+- [x] CHK008 Are loading, empty, and error-state requirements defined for every data-bearing screen? [Completeness, Spec §FR-033]
+- [x] CHK009 Are offline queue persistence, capacity, and eviction requirements specified? [Gap, Spec §FR-022]
+- [x] CHK010 Is a retention/lifecycle requirement for orders and immutable trace records documented? [Gap, Spec §FR-016, §FR-017]
 
 ## Requirement Clarity
 
-- [ ] CHK011 Is "hora exacta" quantified with precision (seconds, and stored timezone representation)? [Clarity, Spec §FR-016]
-- [ ] CHK012 Is the 5-second refresh defined precisely (pull vs push, behavior when the tab is hidden)? [Clarity, Spec §FR-023]
-- [ ] CHK013 Is "indicador visual prominente" defined with measurable properties (position, color, text)? [Clarity, Spec §FR-024]
-- [ ] CHK014 Is "acciones táctiles grandes" quantified with a minimum touch-target size? [Ambiguity, Spec §FR-037]
-- [ ] CHK015 Is the "conjunto pequeño y fijo" exception for combos quantified with a maximum option count? [Clarity, Spec §FR-031]
-- [ ] CHK016 Is "pedido del día" anchored to one precise date field (fecha de reparto vs fecha de asignación) across all list requirements? [Clarity, Spec §FR-018, §FR-019, §FR-029]
-- [ ] CHK017 Is the offline sync window ("plazo máximo 10 segundos") unambiguous about its start point and what counts as completion? [Clarity, Spec §FR-022]
-- [ ] CHK018 Is the numeric precision and rounding of the order total specified (decimals, currency)? [Gap, Spec §FR-006]
+- [x] CHK011 Is "hora exacta" quantified with precision (seconds, and stored timezone representation)? [Clarity, Spec §FR-016]
+- [x] CHK012 Is the 5-second refresh defined precisely (pull vs push, behavior when the tab is hidden)? [Clarity, Spec §FR-023]
+- [x] CHK013 Is "indicador visual prominente" defined with measurable properties (position, color, text)? [Clarity, Spec §FR-024]
+- [x] CHK014 Is "acciones táctiles grandes" quantified with a minimum touch-target size? [Ambiguity, Spec §FR-037]
+- [x] CHK015 Is the "conjunto pequeño y fijo" exception for combos quantified with a maximum option count? [Clarity, Spec §FR-031]
+- [x] CHK016 Is "pedido del día" anchored to one precise date field (fecha de reparto vs fecha de asignación) across all list requirements? [Clarity, Spec §FR-018, §FR-019, §FR-029]
+- [x] CHK017 Is the offline sync window ("plazo máximo 10 segundos") unambiguous about its start point and what counts as completion? [Clarity, Spec §FR-022]
+- [x] CHK018 Is the numeric precision and rounding of the order total specified (decimals, currency)? [Gap, Spec §FR-006]
 
 ## Requirement Consistency
 
-- [ ] CHK019 Are the reassignment rules mutually consistent across single-active-assignment, allowed states, and history preservation? [Consistency, Spec §FR-007–§FR-010]
-- [ ] CHK020 Are the HTTP 400/403/405 outcomes consistent with the role-isolation and state-machine requirements? [Consistency, Spec §FR-010, §FR-013, §FR-017]
-- [ ] CHK021 Is "one screen per function / list-form separation" consistent with the assignment screen listing candidate orders? [Consistency, Spec §FR-035, §FR-020]
-- [ ] CHK022 Do repartidor-visibility requirements align with assignment-candidate requirements (no overlap or gap)? [Consistency, Spec §FR-011, §FR-020]
-- [ ] CHK023 Are the timezone requirements consistent between date entry and display/locale formatting? [Consistency, Spec §FR-029, §FR-039]
+- [x] CHK019 Are the reassignment rules mutually consistent across single-active-assignment, allowed states, and history preservation? [Consistency, Spec §FR-007–§FR-010]
+- [x] CHK020 Are the HTTP 400/403/405 outcomes consistent with the role-isolation and state-machine requirements? [Consistency, Spec §FR-010, §FR-013, §FR-017]
+- [x] CHK021 Is "one screen per function / list-form separation" consistent with the assignment screen listing candidate orders? [Consistency, Spec §FR-035, §FR-020]
+- [x] CHK022 Do repartidor-visibility requirements align with assignment-candidate requirements (no overlap or gap)? [Consistency, Spec §FR-011, §FR-020]
+- [x] CHK023 Are the timezone requirements consistent between date entry and display/locale formatting? [Consistency, Spec §FR-029, §FR-039]
 
 ## Acceptance Criteria Quality & Measurability
 
-- [ ] CHK024 Can every success criterion (SC-001–SC-010) be objectively measured without implementation detail? [Measurability, Spec §SC-001–§SC-010]
-- [ ] CHK025 Is SC-002's "95% of requests <= 2s" scoped to defined request classes and network conditions? [Measurability, Spec §SC-002]
-- [ ] CHK026 Is SC-001's "100% of assigned orders have a final state" bounded by an explicit time window? [Measurability, Spec §SC-001]
-- [ ] CHK027 Are success criteria defined for the role-based access-control outcomes (403/400/405)? [Gap, Spec §SC-*]
-- [ ] CHK028 Is each functional requirement traceable to at least one acceptance scenario or success criterion? [Traceability]
+- [x] CHK024 Can every success criterion (SC-001–SC-010) be objectively measured without implementation detail? [Measurability, Spec §SC-001–§SC-010]
+- [x] CHK025 Is SC-002's "95% of requests <= 2s" scoped to defined request classes and network conditions? [Measurability, Spec §SC-002]
+- [x] CHK026 Is SC-001's "100% of assigned orders have a final state" bounded by an explicit time window? [Measurability, Spec §SC-001]
+- [x] CHK027 Are success criteria defined for the role-based access-control outcomes (403/400/405)? [Gap, Spec §SC-*]
+- [x] CHK028 Is each functional requirement traceable to at least one acceptance scenario or success criterion? [Traceability]
 
 ## Scenario Coverage
 
-- [ ] CHK029 Are primary flows documented for all three roles (Administrador, Repartidor, Supervisor)? [Coverage, Spec §User Stories 1–5]
-- [ ] CHK030 Is the alternate flow for reassigning a REPROGRAMADO order fully specified (new active assignment, back to ASIGNADO)? [Coverage, Spec §FR-009]
-- [ ] CHK031 Are exception flows defined for failed logins and unauthorized access attempts? [Coverage, Spec §FR-001, §FR-011]
-- [ ] CHK032 Are recovery flows defined for offline changes rejected by the server? [Coverage, Spec §FR-022, Clarifications]
-- [ ] CHK033 Are non-functional scenarios (performance, security, reliability) covered for every critical journey? [Coverage, Spec §SC-002, §SC-004]
+- [x] CHK029 Are primary flows documented for all three roles (Administrador, Repartidor, Supervisor)? [Coverage, Spec §User Stories 1–5]
+- [x] CHK030 Is the alternate flow for reassigning a REPROGRAMADO order fully specified (new active assignment, back to ASIGNADO)? [Coverage, Spec §FR-009]
+- [x] CHK031 Are exception flows defined for failed logins and unauthorized access attempts? [Coverage, Spec §FR-001, §FR-011]
+- [x] CHK032 Are recovery flows defined for offline changes rejected by the server? [Coverage, Spec §FR-022, Clarifications]
+- [x] CHK033 Are non-functional scenarios (performance, security, reliability) covered for every critical journey? [Coverage, Spec §SC-002, §SC-004]
 
 ## Edge Case Coverage
 
-- [ ] CHK034 Is the behavior specified for orders created with zero lines vs lines failing validation? [Edge Case, Spec §FR-004, §FR-005]
-- [ ] CHK035 Is concurrent state-change / duplicate-submission handling defined? [Edge Case, Gap]
-- [ ] CHK036 Is behavior defined for REPROGRAMADO orders from previous days appearing in the current-day list? [Edge Case, Spec §FR-019]
-- [ ] CHK037 Is behavior defined when connectivity drops mid-submission of a state change? [Edge Case, Spec §FR-022]
-- [ ] CHK038 Is behavior defined for assignment near the operational-day boundary relative to America/Lima? [Edge Case, Spec §FR-029, §SC-007]
+- [x] CHK034 Is the behavior specified for orders created with zero lines vs lines failing validation? [Edge Case, Spec §FR-004, §FR-005]
+- [x] CHK035 Is concurrent state-change / duplicate-submission handling defined? [Edge Case, Gap]
+- [x] CHK036 Is behavior defined for REPROGRAMADO orders from previous days appearing in the current-day list? [Edge Case, Spec §FR-019]
+- [x] CHK037 Is behavior defined when connectivity drops mid-submission of a state change? [Edge Case, Spec §FR-022]
+- [x] CHK038 Is behavior defined for assignment near the operational-day boundary relative to America/Lima? [Edge Case, Spec §FR-029, §SC-007]
 
 ## Non-Functional Requirements
 
-- [ ] CHK039 Are security requirements specified for password storage, transport, and secret management? [Completeness, Spec §FR-026–§FR-028]
-- [ ] CHK040 Is the "no third-party external calls" requirement testable and are client endpoints constrained to own APIs? [Measurability, Spec §FR-028]
-- [ ] CHK041 Are accessibility requirements (labels, focus, contrast, keyboard) specified with measurable criteria? [Clarity, Spec §FR-034]
-- [ ] CHK042 Are responsive breakpoints and the no-horizontal-scroll requirement defined for all views? [Coverage, Spec §FR-037, §SC-006]
-- [ ] CHK043 Are observability/logging requirements addressed or explicitly declared out of scope? [Gap]
-- [ ] CHK044 Are performance requirements defined for pagination and list refresh under expected data volume? [Gap, Spec §FR-021, §SC-010]
+- [x] CHK039 Are security requirements specified for password storage, transport, and secret management? [Completeness, Spec §FR-026–§FR-028]
+- [x] CHK040 Is the "no third-party external calls" requirement testable and are client endpoints constrained to own APIs? [Measurability, Spec §FR-028]
+- [x] CHK041 Are accessibility requirements (labels, focus, contrast, keyboard) specified with measurable criteria? [Clarity, Spec §FR-034]
+- [x] CHK042 Are responsive breakpoints and the no-horizontal-scroll requirement defined for all views? [Coverage, Spec §FR-037, §SC-006]
+- [x] CHK043 Are observability/logging requirements addressed or explicitly declared out of scope? [Gap]
+- [x] CHK044 Are performance requirements defined for pagination and list refresh under expected data volume? [Gap, Spec §FR-021, §SC-010]
 
 ## Dependencies & Assumptions
 
-- [ ] CHK045 Is the assumption that users/unidades/clientes are pre-seeded (no admin CRUD) documented and validated? [Assumption, Spec §Assumptions]
-- [ ] CHK046 Is backend availability during operational hours documented as a dependency? [Assumption, Spec §Assumptions]
-- [ ] CHK047 Is the browser-storage assumption for the offline queue documented with its constraints? [Assumption, Spec §FR-022]
-- [ ] CHK048 Are the PRD out-of-scope items explicitly restated to prevent scope creep? [Assumption, Spec §Assumptions]
+- [x] CHK045 Is the assumption that users/unidades/clientes are pre-seeded (no admin CRUD) documented and validated? [Assumption, Spec §Assumptions]
+- [x] CHK046 Is backend availability during operational hours documented as a dependency? [Assumption, Spec §Assumptions]
+- [x] CHK047 Is the browser-storage assumption for the offline queue documented with its constraints? [Assumption, Spec §FR-022]
+- [x] CHK048 Are the PRD out-of-scope items explicitly restated to prevent scope creep? [Assumption, Spec §Assumptions]
 
 ## Ambiguities & Conflicts
 
-- [ ] CHK049 Is "una o más líneas" reconciled with the HTTP 400 rule for orders without lines? [Ambiguity, Spec §FR-004, §FR-005]
-- [ ] CHK050 Is it clarified who may set REPROGRAMADO (repartidor per state machine vs admin reassignment)? [Ambiguity, Spec §FR-009, §FR-013]
-- [ ] CHK051 Is the interaction between irreversible ENTREGADO and allowed reassignment states resolved? [Conflict, Spec §FR-010, §FR-015]
+- [x] CHK049 Is "una o más líneas" reconciled with the HTTP 400 rule for orders without lines? [Ambiguity, Spec §FR-004, §FR-005]
+- [x] CHK050 Is it clarified who may set REPROGRAMADO (repartidor per state machine vs admin reassignment)? [Ambiguity, Spec §FR-009, §FR-013]
+- [x] CHK051 Is the interaction between irreversible ENTREGADO and allowed reassignment states resolved? [Conflict, Spec §FR-010, §FR-015]
 
 ## Notes
 
