@@ -64,7 +64,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T019 [P] **Front test**: componente `data-state` (skeleton en carga, estado vacío "No se encontraron registros", contenido con datos) en `frontend/src/app/shared/data-state/data-state.component.spec.ts` (debe FALLAR primero).
 - [x] T020 **Front**: componente compartido `data-state` (carga/vacío, FR-033) reutilizable en `frontend/src/app/shared/data-state/`.
 - [x] T021 Implementar shell Sakai (`app-topbar`, `app-sidebar` colapsable, `app-footer`) con título de página + breadcrumb y resaltado de sección activa en `frontend/src/app/layout/`.
-- [ ] T022 Configurar routing base y menú lateral por rol (una opción por función/CRUD) en `frontend/src/app/app.routes.ts`.
+- [x] T022 Configurar routing base y menú lateral por rol (una opción por función/CRUD) en `frontend/src/app/app.routes.ts`.
 
 **Checkpoint**: Shell navegable con tema, apiUrl por entorno, componente `data-state` y `dotnet test` verde. Historias habilitadas.
 

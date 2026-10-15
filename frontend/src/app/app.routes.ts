@@ -1,3 +1,64 @@
 import { Routes } from '@angular/router';
+import { roleGuard } from './core/auth/role.guard';
 
-export const routes: Routes = [];
+const placeholder = () =>
+  import('./shared/placeholder/placeholder.component').then((m) => m.PlaceholderComponent);
+
+export const routes: Routes = [
+  {
+    path: 'login',
+    loadComponent: placeholder,
+    data: { layout: 'blank' },
+  },
+  {
+    path: '',
+    canActivate: [roleGuard('Administrador', 'Repartidor', 'Supervisor')],
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./features/home/home.component').then((m) => m.HomeComponent),
+      },
+      {
+        path: 'clientes',
+        canActivate: [roleGuard('Administrador')],
+        loadComponent: placeholder,
+        data: { title: 'Clientes', breadcrumb: [{ label: 'Clientes' }] },
+      },
+      {
+        path: 'pedidos',
+        canActivate: [roleGuard('Administrador')],
+        loadComponent: placeholder,
+        data: { title: 'Pedidos', breadcrumb: [{ label: 'Pedidos' }] },
+      },
+      {
+        path: 'pedidos/nuevo',
+        canActivate: [roleGuard('Administrador')],
+        loadComponent: placeholder,
+        data: {
+          title: 'Nuevo pedido',
+          breadcrumb: [{ label: 'Pedidos', routerLink: '/pedidos' }, { label: 'Nuevo' }],
+        },
+      },
+      {
+        path: 'asignacion',
+        canActivate: [roleGuard('Administrador')],
+        loadComponent: placeholder,
+        data: { title: 'Asignación', breadcrumb: [{ label: 'Asignación' }] },
+      },
+      {
+        path: 'panel-dia',
+        canActivate: [roleGuard('Administrador', 'Supervisor')],
+        loadComponent: placeholder,
+        data: { title: 'Panel del día', breadcrumb: [{ label: 'Panel del día' }] },
+      },
+      {
+        path: 'ruta',
+        canActivate: [roleGuard('Repartidor')],
+        loadComponent: placeholder,
+        data: { title: 'Mi ruta', layout: 'repartidor' },
+      },
+    ],
+  },
+  { path: '**', redirectTo: '' },
+];
