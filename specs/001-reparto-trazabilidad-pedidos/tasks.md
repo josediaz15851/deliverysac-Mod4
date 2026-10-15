@@ -182,7 +182,7 @@ refresco cada 5 s; banner "SIN CONEXIÓN" al perder red (AC-12/13/18/19).
 **Independent Test**: `ng build --configuration production` usa la URL de producción sin editar
 componentes (AC-20/AC-21); fechas en America/Lima sin desfase (AC-23).
 
-- [ ] T069 [US6] **Front**: verificar que build de producción resuelve `apiUrl` desde el entorno activo sin editar componentes en `frontend/src/environments/`.
+- [x] T069 [US6] **Front**: verificar que build de producción resuelve `apiUrl` desde el entorno activo sin editar componentes en `frontend/src/environments/`.
 - [x] T070 [P] [US6] **Back**: forzar HTTPS/TLS 1.2+ y comprobar que no hay dominios externos configurados (FR-027/FR-028) en `backend/src/DeliverySac.Api/Program.cs`.
 - [x] T071 [P] [US6] **Test back**: integración RNF-06/AC-23 (fecha enviada `yyyy-MM-dd` corresponde al día operativo America/Lima, sin corrimiento UTC) en `backend/tests/DeliverySac.Tests/Integration/FechasTests.cs`.
 
