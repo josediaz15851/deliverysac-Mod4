@@ -59,40 +59,33 @@ public sealed class DeliverySacApiFactory : WebApplicationFactory<Program>
             await db.SaveChangesAsync();
         }
 
-        if (!await db.Usuarios.AnyAsync(u => u.Rol == RolUsuario.Repartidor))
+        await EnsureUsuarioAsync(db, hasher, RepartidorUser, "Repartidor de Prueba", RolUsuario.Repartidor);
+        await EnsureUsuarioAsync(db, hasher, OtroRepartidorUser, "Otro Repartidor de Prueba", RolUsuario.Repartidor);
+        await EnsureUsuarioAsync(db, hasher, AdminUser, "Administrador de Prueba", RolUsuario.Administrador);
+    }
+
+    private static async Task EnsureUsuarioAsync(
+        DeliverySacDbContext db,
+        IPasswordHasher hasher,
+        string nombreUsuario,
+        string nombreCompleto,
+        RolUsuario rol)
+    {
+        if (await db.Usuarios.AnyAsync(u => u.NombreUsuario == nombreUsuario))
         {
-            db.Usuarios.Add(new Usuario
-            {
-                NombreUsuario = RepartidorUser,
-                NombreCompleto = "Repartidor de Prueba",
-                PasswordHash = hasher.Hash(AdminPassword),
-                Rol = RolUsuario.Repartidor,
-                Activo = true,
-            });
-            db.Usuarios.Add(new Usuario
-            {
-                NombreUsuario = OtroRepartidorUser,
-                NombreCompleto = "Otro Repartidor de Prueba",
-                PasswordHash = hasher.Hash(AdminPassword),
-                Rol = RolUsuario.Repartidor,
-                Activo = true,
-            });
-            await db.SaveChangesAsync();
+            return;
         }
 
-        if (!await db.Usuarios.AnyAsync(u => u.NombreUsuario == AdminUser))
+        db.Usuarios.Add(new Usuario
         {
-            db.Usuarios.Add(new Usuario
-            {
-                NombreUsuario = AdminUser,
-                NombreCompleto = "Administrador de Prueba",
-                PasswordHash = hasher.Hash(AdminPassword),
-                Rol = RolUsuario.Administrador,
-                Activo = true,
-            });
+            NombreUsuario = nombreUsuario,
+            NombreCompleto = nombreCompleto,
+            PasswordHash = hasher.Hash(AdminPassword),
+            Rol = rol,
+            Activo = true,
+        });
 
-            await db.SaveChangesAsync();
-        }
+        await db.SaveChangesAsync();
     }
 
     public async Task<HttpClient> CreateAuthenticatedClientAsync()
