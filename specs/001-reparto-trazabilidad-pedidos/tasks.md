@@ -79,7 +79,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T023 [US1] **Front test**: `AuthService` (guarda token, maneja 401) y componente de login (validación, error inline) en `frontend/src/app/features/auth/login/login.component.spec.ts` (debe FALLAR primero).
 - [x] T024 [US1] **Front**: pantalla de login split-screen glassmorphism (tabs por rol, validación, error inline) en `frontend/src/app/features/auth/login/`.
 - [x] T025 [US1] **Front**: conectar formulario de login a `AuthService` (guarda token, maneja 401 con Toast) en `frontend/src/app/features/auth/login/` — cableado preparado para el back de T027.
-- [ ] T026 [P] [US1] **Test back**: integración de login (credenciales válidas → token con rol; inválidas → 401) en `backend/tests/DeliverySac.Tests/Integration/AuthEndpointsTests.cs` (debe FALLAR primero).
+- [x] T026 [P] [US1] **Test back**: integración de login (credenciales válidas → token con rol; inválidas → 401) en `backend/tests/DeliverySac.Tests/Integration/AuthEndpointsTests.cs` (debe FALLAR primero).
 - [ ] T027 [US1] **Back**: endpoint `POST /api/auth/login` (JWT con rol, 401) en `backend/src/DeliverySac.Api/Controllers/AuthController.cs`.
 - [ ] T028 [US1] **Front**: mostrar usuario/rol en topbar y acción "Cerrar sesión" (limpia credenciales, redirige a login; sin retroceso) en `frontend/src/app/layout/`.
 
