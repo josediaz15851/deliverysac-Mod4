@@ -1,0 +1,51 @@
+# ==== .NET / Backend ====
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+artifacts/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+*.csproj.user
+
+# Configuración local con credenciales (NUNCA versionar)
+**/appsettings.Development.local.json
+**/appsettings.*.local.json
+*.env
+.env.local
+
+# ==== Node / Frontend ====
+node_modules/
+dist/
+out-tsc/
+bazel-out/
+.angular/cache/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==== Tests / cobertura ====
+coverage/
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# ==== IDEs / Editores ====
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+.history/
+
+# ==== Sistema ====
+.DS_Store
+Thumbs.db
+desktop.ini
