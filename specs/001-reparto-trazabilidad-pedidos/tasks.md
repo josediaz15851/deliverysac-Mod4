@@ -120,8 +120,8 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 (AC-05/06/07/07a/09/10/11/14/15).
 
 - [x] T042 [US3] **Front test**: pantalla de asignación (selección de repartidor/unidad, listado de candidatos `PENDIENTE`/`REPROGRAMADO`) en `frontend/src/app/features/asignacion/asignacion-form/asignacion-form.component.spec.ts` (debe FALLAR primero).
-- [ ] T043 [US3] **Front**: pantalla de asignación con selección de repartidor/unidad (autocompletar/combo para conjunto pequeño) y listado de candidatos en `frontend/src/app/features/asignacion/asignacion-form/`.
-- [ ] T044 [US3] **Front**: confirmación (`p-confirmDialog`) al reasignar y Toast de resultado en `frontend/src/app/features/asignacion/asignacion-form/`.
+- [x] T043 [US3] **Front**: pantalla de asignación con selección de repartidor/unidad (autocompletar/combo para conjunto pequeño) y listado de candidatos en `frontend/src/app/features/asignacion/asignacion-form/`.
+- [x] T044 [US3] **Front**: confirmación (`p-confirmDialog`) al reasignar y Toast de resultado en `frontend/src/app/features/asignacion/asignacion-form/`.
 - [ ] T045 [P] [US3] **Test back**: integración de asignación (única activa; `POST /api/pedidos/{id}/asignaciones` → 400 si el estado no es `PENDIENTE` ni `REPROGRAMADO`) en `backend/tests/DeliverySac.Tests/Integration/AsignacionesEndpointsTests.cs` (debe FALLAR primero).
 - [ ] T046 [US3] **Back**: endpoints `POST /api/pedidos/{pedidoId}/asignaciones`, `GET /api/pedidos/candidatos`, `GET /api/repartidores`, `GET /api/unidades` en `backend/src/DeliverySac.Api/Controllers/AsignacionesController.cs`.
 - [ ] T047 [US3] **Front test**: componente `estado-tag` (color correcto por cada estado) en `frontend/src/app/shared/estado-tag/estado-tag.component.spec.ts` (debe FALLAR primero).

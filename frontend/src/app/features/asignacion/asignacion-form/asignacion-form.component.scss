@@ -1,0 +1,21 @@
+.asignacion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.asignacion__header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.asignacion__resumen p {
+  margin: 0.25rem 0;
+}
+
+.asignacion__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

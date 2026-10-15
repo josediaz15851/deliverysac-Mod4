@@ -1,0 +1,92 @@
+<div class="asignacion">
+  <div class="asignacion__header">
+    <h2>Asignación de pedidos</h2>
+  </div>
+
+  <app-data-state [loading]="loading" [empty]="!loading && candidatos.length === 0" emptyMessage="No hay pedidos pendientes ni reprogramados">
+    <p-table
+      [value]="candidatos"
+      [lazy]="true"
+      [paginator]="true"
+      [rows]="size"
+      [totalRecords]="total"
+      [tableStyle]="{ 'min-width': '40rem' }"
+      (onLazyLoad)="onLazyLoad($event)"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Cliente</th>
+          <th>Fecha de reparto</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-pedido>
+        <tr>
+          <td>{{ pedido.clienteNombre }}</td>
+          <td>{{ pedido.fechaReparto | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <p-tag
+              [value]="pedido.estado === 'Reprogramado' ? 'Reprogramado' : 'Pendiente'"
+              [severity]="pedido.estado === 'Reprogramado' ? 'secondary' : 'warn'"
+            ></p-tag>
+          </td>
+          <td>
+            <p-button label="Asignar" icon="pi pi-send" (onClick)="seleccionarPedido(pedido)"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </app-data-state>
+
+  <p-dialog
+    header="Asignar pedido"
+    [(visible)]="dialogVisible"
+    [modal]="true"
+    [style]="{ width: '450px' }"
+  >
+    @if (pedidoSeleccionado; as pedido) {
+      <div class="asignacion__resumen">
+        <p><strong>Cliente:</strong> {{ pedido.clienteNombre }}</p>
+        <p><strong>Fecha:</strong> {{ pedido.fechaReparto | date: 'dd/MM/yyyy' }}</p>
+      </div>
+    }
+
+    <div class="field">
+      <label for="repartidor">Repartidor</label>
+      <p-select
+        inputId="repartidor"
+        [options]="repartidores"
+        optionLabel="nombreCompleto"
+        optionValue="id"
+        placeholder="Seleccione un repartidor"
+        [(ngModel)]="repartidorSeleccionadoId"
+        styleClass="w-full"
+      ></p-select>
+    </div>
+
+    <div class="field">
+      <label for="unidad">Unidad</label>
+      <p-select
+        inputId="unidad"
+        [options]="unidades"
+        optionLabel="identificador"
+        optionValue="id"
+        placeholder="Seleccione una unidad"
+        [(ngModel)]="unidadSeleccionadaId"
+        styleClass="w-full"
+      ></p-select>
+    </div>
+
+    <div class="asignacion__actions">
+      <p-button label="Cancelar" severity="secondary" icon="pi pi-times" (onClick)="dialogVisible = false"></p-button>
+      <p-button
+        label="Asignar"
+        icon="pi pi-check"
+        [disabled]="!puedeAsignar"
+        (onClick)="confirmarAsignacion()"
+      ></p-button>
+    </div>
+  </p-dialog>
+</div>

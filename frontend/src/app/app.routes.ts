@@ -53,7 +53,10 @@ export const routes: Routes = [
       {
         path: 'asignacion',
         canActivate: [roleGuard('Administrador')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/asignacion/asignacion-form/asignacion-form.component').then(
+            (m) => m.AsignacionFormComponent,
+          ),
         data: { title: 'Asignación', breadcrumb: [{ label: 'Asignación' }] },
       },
       {
