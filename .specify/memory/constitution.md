@@ -1,26 +1,3 @@
-<!--
-Sync Impact Report
-==================
-Version change: (unratified scaffold) → 1.0.0
-Bump rationale: Initial ratification of the DeliverySac constitution. No prior
-ratified version existed, so the template scaffold is replaced by the first
-adopted version (1.0.0).
-
-Modified principles: none (initial adoption)
-Added principles:
-  - I. Spec-First & Test-First (TDD) (NON-NEGOTIABLE)
-  - II. Aislamiento Absoluto de IA
-  - III. Inmutabilidad y Zona Horaria (America/Lima)
-  - IV. Cero Secretos en el Código
-  - V. Alineación Estricta al PRD
-Added sections:
-  - Restricciones Adicionales y Estándares Técnicos
-  - Flujo de Desarrollo y Puertas de Calidad
-Removed sections: none
-
-Deferred TODOs: none
--->
-
 # DeliverySac Constitution
 
 ## Core Principles
