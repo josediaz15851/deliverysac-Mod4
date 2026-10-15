@@ -1,0 +1,40 @@
+<form class="cliente-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="field">
+    <label for="cliente-nombre">Nombre</label>
+    <input
+      id="cliente-nombre"
+      type="text"
+      pInputText
+      formControlName="nombre"
+      [attr.aria-invalid]="form.controls.nombre.invalid && form.controls.nombre.touched"
+    />
+    @if (form.controls.nombre.invalid && form.controls.nombre.touched) {
+      <small class="cliente-form__error">El nombre es obligatorio</small>
+    }
+  </div>
+
+  <div class="field">
+    <label for="cliente-direccion">Dirección</label>
+    <input
+      id="cliente-direccion"
+      type="text"
+      pInputText
+      formControlName="direccion"
+      [attr.aria-invalid]="form.controls.direccion.invalid && form.controls.direccion.touched"
+    />
+    @if (form.controls.direccion.invalid && form.controls.direccion.touched) {
+      <small class="cliente-form__error">La dirección es obligatoria</small>
+    }
+  </div>
+
+  <div class="cliente-form__actions">
+    <p-button
+      type="button"
+      label="Cancelar"
+      severity="secondary"
+      icon="pi pi-times"
+      (onClick)="cancelar()"
+    ></p-button>
+    <p-button type="submit" label="Guardar" icon="pi pi-check"></p-button>
+  </div>
+</form>
