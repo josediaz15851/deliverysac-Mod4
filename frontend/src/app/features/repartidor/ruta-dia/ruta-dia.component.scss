@@ -53,3 +53,24 @@
   margin: 0;
   font-weight: 600;
 }
+
+.ruta-dia__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.ruta-dia__acciones ::ng-deep .p-button {
+  min-height: 2.75rem;
+}
+
+.ruta-dia__error {
+  color: var(--red-500, #d32f2f);
+}
+
+.ruta-dia__dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

@@ -18,8 +18,46 @@
             {{ pedido.direccion }}
           </p>
           <p class="ruta-dia__total">Total: {{ pedido.total | currency: 'USD' : 'symbol' : '1.2-2' : 'en-US' }}</p>
+
+          @if (accionesDisponibles(pedido.estado).length > 0) {
+            <div class="ruta-dia__acciones">
+              @for (accion of accionesDisponibles(pedido.estado); track accion) {
+                <p-button
+                  [label]="etiquetaAccion(accion)"
+                  [severity]="accion === 'Entregado' ? 'success' : accion === 'EnRuta' ? 'primary' : 'danger'"
+                  [raised]="true"
+                  (onClick)="solicitarCambio(pedido, accion)"
+                ></p-button>
+              }
+            </div>
+          }
         </li>
       }
     </ul>
   </app-data-state>
+
+  <p-dialog
+    header="Motivo"
+    [(visible)]="motivoVisible"
+    [modal]="true"
+    [style]="{ width: '380px' }"
+  >
+    <div class="field">
+      <label for="motivo">Indique el motivo</label>
+      <textarea
+        id="motivo"
+        pInputTextarea
+        [(ngModel)]="motivo"
+        rows="3"
+        [class.ng-invalid]="motivoError"
+      ></textarea>
+      @if (motivoError) {
+        <small class="ruta-dia__error">El motivo es obligatorio</small>
+      }
+    </div>
+    <div class="ruta-dia__dialog-actions">
+      <p-button label="Cancelar" severity="secondary" (onClick)="motivoVisible = false"></p-button>
+      <p-button label="Confirmar" (onClick)="confirmarMotivo()"></p-button>
+    </div>
+  </p-dialog>
 </div>

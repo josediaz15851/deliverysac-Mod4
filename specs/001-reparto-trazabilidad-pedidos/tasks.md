@@ -133,7 +133,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T053 [US3] **Back**: endpoints `POST /api/pedidos/{id}/estados` (400 transición inválida / 400 sin motivo / 403 no propietario) y `GET /api/pedidos/{id}/trazabilidad` (solo lectura; 405 ante intentos de edición) en `backend/src/DeliverySac.Api/Controllers/PedidosController.cs`.
 - [x] T054 [US3] **Back**: endpoint `GET /api/repartidor/pedidos` (solo pedidos propios del día; 403 en accesos ajenos) en `backend/src/DeliverySac.Api/Controllers/RepartidorController.cs`.
 - [x] T055 [US3] **Front test**: botones de cambio de estado en la ruta (motivo obligatorio en `NO_ENTREGADO`/`REPROGRAMADO`, confirmación para estados finales) en `frontend/src/app/features/repartidor/ruta-dia/ruta-dia.component.spec.ts` (debe FALLAR primero).
-- [ ] T056 [US3] **Front**: botones de cambio de estado en la ruta con confirmación para estados finales y campo de motivo obligatorio cuando aplique en `frontend/src/app/features/repartidor/ruta-dia/`.
+- [x] T056 [US3] **Front**: botones de cambio de estado en la ruta con confirmación para estados finales y campo de motivo obligatorio cuando aplique en `frontend/src/app/features/repartidor/ruta-dia/`.
 
 **Checkpoint**: US1, US2 y US3 funcionales; el flujo operativo principal (crear → asignar → marcar → visualizar) funciona.
 
