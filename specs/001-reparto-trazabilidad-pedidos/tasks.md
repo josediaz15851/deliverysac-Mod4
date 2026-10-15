@@ -199,7 +199,7 @@ componentes (AC-20/AC-21); fechas en America/Lima sin desfase (AC-23).
 - [x] T074 [P] **Front test**: consistencia temática y de etiquetas de estado en `frontend/src/app/shared/theme.spec.ts`.
 - [x] T075 [P] **Front**: consistencia temática y etiquetas de estado aplicadas en todas las pantallas (FR-030/FR-036) en `frontend/src/app/shared/`.
 - [x] T076 [P] **Back test**: verificación de rendimiento (P95 ≤ 2 s en listados paginados bajo condiciones normales; SC-002) en `backend/tests/DeliverySac.Tests/Integration/PerformanceTests.cs`.
-- [ ] T077 [P] **Front test**: verificación responsive sin scroll horizontal a 320px en vistas operativas (SC-006) en `frontend/src/app/shared/responsive.spec.ts`.
+- [x] T077 [P] **Front test**: verificación responsive sin scroll horizontal a 320px en vistas operativas (SC-006) en `frontend/src/app/shared/responsive.spec.ts`.
 - [ ] T078 [P] Documentación en `docs/` y ejecución de la validación de `quickstart.md`.
 - [ ] T079 Revisión final de la constitución (`.specify/memory/constitution.md`): sin lógica de IA mezclada, sin secretos versionados, trazas inmutables, sin funcionalidad fuera del PRD.
 
