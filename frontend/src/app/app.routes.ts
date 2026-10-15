@@ -38,7 +38,10 @@ export const routes: Routes = [
       {
         path: 'pedidos/nuevo',
         canActivate: [roleGuard('Administrador')],
-        loadComponent: placeholder,
+        loadComponent: () =>
+          import('./features/pedidos/pedido-form/pedido-form.component').then(
+            (m) => m.PedidoFormComponent,
+          ),
         data: {
           title: 'Nuevo pedido',
           breadcrumb: [{ label: 'Pedidos', routerLink: '/pedidos' }, { label: 'Nuevo' }],

@@ -1,0 +1,84 @@
+<form class="pedido-form" [formGroup]="form" (ngSubmit)="submit()">
+  <div class="pedido-form__grid">
+    <div class="field">
+      <label for="cliente">Cliente</label>
+      <p-autoComplete
+        inputId="cliente"
+        formControlName="clienteId"
+        [suggestions]="clientesSugeridos"
+        (completeMethod)="buscarCliente($event)"
+        (onSelect)="onClienteSeleccionado($event.value)"
+        field="nombre"
+        [forceSelection]="true"
+        placeholder="Buscar cliente"
+        styleClass="w-full"
+      ></p-autoComplete>
+      @if (form.controls.clienteId.invalid && form.controls.clienteId.touched) {
+        <small class="pedido-form__error">Seleccione un cliente</small>
+      }
+    </div>
+
+    <div class="field">
+      <label for="fechaReparto">Fecha de reparto</label>
+      <p-calendar
+        inputId="fechaReparto"
+        formControlName="fechaReparto"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        styleClass="w-full"
+      ></p-calendar>
+      @if (form.controls.fechaReparto.invalid && form.controls.fechaReparto.touched) {
+        <small class="pedido-form__error">La fecha de reparto es obligatoria</small>
+      }
+    </div>
+  </div>
+
+  <div class="field">
+    <label for="comentario">Comentario</label>
+    <textarea id="comentario" pInputTextarea formControlName="comentario" rows="2"></textarea>
+  </div>
+
+  <div class="pedido-form__lines-header">
+    <h3>Productos</h3>
+    <p-button label="Agregar línea" icon="pi pi-plus" (onClick)="agregarLinea()"></p-button>
+  </div>
+
+  <table class="pedido-form__lines">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Precio unitario</th>
+        <th>Descripción</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (linea of lineas.controls; track $index) {
+        <tr [formGroup]="asFormGroup(linea)">
+          <td><input pInputText formControlName="producto" /></td>
+          <td><p-inputNumber formControlName="cantidad" [min]="1" [showButtons]="true"></p-inputNumber></td>
+          <td><p-inputNumber formControlName="precioUnitario" mode="currency" currency="USD" locale="en-US" [min]="0"></p-inputNumber></td>
+          <td><input pInputText formControlName="descripcion" /></td>
+          <td>
+            <p-button icon="pi pi-trash" severity="danger" text rounded ariaLabel="Quitar línea" (onClick)="quitarLinea($index)"></p-button>
+          </td>
+        </tr>
+      } @empty {
+        <tr>
+          <td colspan="5" class="pedido-form__empty">Agregue al menos una línea</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="pedido-form__total">
+    <span>Total:</span>
+    <strong>{{ total | currency: 'USD' : 'symbol' : '1.2-2' : 'en-US' }}</strong>
+  </div>
+
+  <div class="pedido-form__actions">
+    <p-button type="button" label="Cancelar" severity="secondary" icon="pi pi-times" (onClick)="lineas.clear(); form.reset()"></p-button>
+    <p-button type="submit" label="Crear pedido" icon="pi pi-check"></p-button>
+  </div>
+</form>
