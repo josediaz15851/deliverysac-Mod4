@@ -53,6 +53,14 @@ public class EstadoPedidoService
         Guid operacionId,
         CancellationToken cancellationToken)
     {
+        var operacionExistente = await _db.CambiosEstado
+            .AnyAsync(c => c.OperacionId == operacionId, cancellationToken);
+
+        if (operacionExistente)
+        {
+            return ResultadoCambioEstado.Ok;
+        }
+
         var pedido = await _db.Pedidos
             .Include(p => p.Asignaciones)
             .FirstOrDefaultAsync(p => p.Id == pedidoId, cancellationToken);
