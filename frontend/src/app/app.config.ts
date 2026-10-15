@@ -11,6 +11,8 @@ import { routes } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 import { DeliverySacPreset } from './../theme/deliverysac-preset';
 import { authInterceptor } from './core/auth/auth.interceptor';
+import { OfflineStore } from './core/offline/offline.models';
+import { IndexedDbOfflineStore } from './core/offline/indexeddb-offline.store';
 
 registerLocaleData(localeEsPe);
 
@@ -24,6 +26,7 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     ConfirmationService,
     { provide: LOCALE_ID, useValue: 'es-PE' },
+    { provide: OfflineStore, useClass: IndexedDbOfflineStore },
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',

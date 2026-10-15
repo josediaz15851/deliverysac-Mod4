@@ -10,6 +10,8 @@ describe('OfflineService', () => {
   let service: OfflineService;
   let httpMock: HttpTestingController;
 
+  const tick = () => new Promise((resolve) => setTimeout(resolve));
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -50,6 +52,8 @@ describe('OfflineService', () => {
 
     const sincronizacion = service.sincronizar();
 
+    await tick();
+
     const req = httpMock.expectOne('http://test/api/pedidos/7/estados');
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual({ operacionId: 'op-9', estadoNuevo: 'Entregado' });
@@ -66,6 +70,8 @@ describe('OfflineService', () => {
     await service.encolar({ pedidoId: 5, estadoNuevo: 'Entregado' }, 'op-c');
 
     const sincronizacion = service.sincronizar();
+
+    await tick();
 
     const req = httpMock.expectOne('http://test/api/pedidos/5/estados');
     req.flush({ detail: 'Estado desactualizado' }, { status: 409, statusText: 'Conflict' });
