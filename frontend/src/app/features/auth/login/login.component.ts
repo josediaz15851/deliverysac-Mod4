@@ -68,6 +68,11 @@ export class LoginComponent {
       error: () => {
         this.loading = false;
         this.errorMessage = 'Usuario o contraseña incorrectos';
+        this.messageService.add({
+          severity: 'error',
+          summary: 'No se pudo iniciar sesión',
+          detail: 'Usuario o contraseña incorrectos',
+        });
       },
     });
   }
