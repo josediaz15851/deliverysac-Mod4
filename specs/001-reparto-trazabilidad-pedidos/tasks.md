@@ -124,7 +124,7 @@ el front (con su prueba), luego el back de esa misma pantalla.** Tareas pequeña
 - [x] T044 [US3] **Front**: confirmación (`p-confirmDialog`) al reasignar y Toast de resultado en `frontend/src/app/features/asignacion/asignacion-form/`.
 - [x] T045 [P] [US3] **Test back**: integración de asignación (única activa; `POST /api/pedidos/{id}/asignaciones` → 400 si el estado no es `PENDIENTE` ni `REPROGRAMADO`) en `backend/tests/DeliverySac.Tests/Integration/AsignacionesEndpointsTests.cs` (debe FALLAR primero).
 - [x] T046 [US3] **Back**: endpoints `POST /api/pedidos/{pedidoId}/asignaciones`, `GET /api/pedidos/candidatos`, `GET /api/repartidores`, `GET /api/unidades` en `backend/src/DeliverySac.Api/Controllers/AsignacionesController.cs`.
-- [ ] T047 [US3] **Front test**: componente `estado-tag` (color correcto por cada estado) en `frontend/src/app/shared/estado-tag/estado-tag.component.spec.ts` (debe FALLAR primero).
+- [x] T047 [US3] **Front test**: componente `estado-tag` (color correcto por cada estado) en `frontend/src/app/shared/estado-tag/estado-tag.component.spec.ts` (debe FALLAR primero).
 - [ ] T048 [US3] **Front**: ruta del día del repartidor (una columna, mobile-first, sin menú lateral, acciones táctiles grandes) en `frontend/src/app/features/repartidor/ruta-dia/`.
 - [ ] T049 [US3] **Front**: componente compartido `estado-tag` (etiqueta de color por estado) en `frontend/src/app/shared/estado-tag/`.
 - [ ] T050 [P] [US3] **Test back**: unit de la máquina de estados (`PENDIENTE → ASIGNADO → EN_RUTA → (ENTREGADO|NO_ENTREGADO|REPROGRAMADO)`, `ENTREGADO` terminal, motivo obligatorio) en `backend/tests/DeliverySac.Tests/Unit/EstadoPedidoTests.cs` (debe FALLAR primero).
