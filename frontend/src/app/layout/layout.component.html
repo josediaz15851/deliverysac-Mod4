@@ -1,0 +1,29 @@
+<p-toast position="top-right"></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+@if (showChrome()) {
+  <div class="layout">
+    <app-topbar></app-topbar>
+
+    <div class="layout__body">
+      @if (showSidebar()) {
+        <app-sidebar></app-sidebar>
+      }
+
+      <main class="layout__content">
+        @if (pageTitle(); as title) {
+          <div class="layout__page-header">
+            <h1 class="layout__page-title">{{ title }}</h1>
+            <p-breadcrumb [model]="breadcrumbItems()" [home]="home"></p-breadcrumb>
+          </div>
+        }
+
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+
+    <app-footer></app-footer>
+  </div>
+} @else {
+  <router-outlet></router-outlet>
+}

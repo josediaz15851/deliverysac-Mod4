@@ -1,0 +1,35 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--surface-ground);
+}
+
+.layout__body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.layout__content {
+  flex: 1;
+  padding: 1.5rem;
+  min-width: 0;
+}
+
+.layout__page-header {
+  margin-bottom: 1rem;
+}
+
+.layout__page-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .layout__content {
+    padding: 1rem;
+  }
+}
