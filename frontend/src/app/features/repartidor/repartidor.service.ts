@@ -12,6 +12,11 @@ export interface PedidoRuta {
   total: number;
 }
 
+export interface CambioEstadoRuta {
+  estadoNuevo: string;
+  motivo?: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class RepartidorService {
   private readonly http = inject(HttpClient);
@@ -19,5 +24,9 @@ export class RepartidorService {
 
   listarRuta(): Observable<PedidoRuta[]> {
     return this.http.get<PedidoRuta[]>(`${this.config.apiUrl}/api/repartidor/pedidos`);
+  }
+
+  cambiarEstado(pedidoId: number, cambio: CambioEstadoRuta): Observable<void> {
+    return this.http.post<void>(`${this.config.apiUrl}/api/pedidos/${pedidoId}/estados`, cambio);
   }
 }
